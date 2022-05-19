@@ -1,6 +1,6 @@
 class Debug {
 	constructor() {
-		this._debugModePass = 'toor';
+		this._debugModePass = 'avdan';
 		this._loadDebugObjects();
 	}
 
