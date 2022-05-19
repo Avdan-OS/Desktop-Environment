@@ -62,7 +62,7 @@ class Authenticate {
 		})
 		if (request.status !== 200) return this._authenticationFailed(true);
 
-		console.log(request);
+		//console.log(request);
 
 		const data = await request.text();
 
@@ -70,6 +70,8 @@ class Authenticate {
 
 		switch (data) {
 			case '405':
+				this._authenticationFailed(false, true);
+				break;
 			case '403':
 				this._authenticationFailed();
 				break;
@@ -138,7 +140,7 @@ class Authenticate {
 	}
 
 	// You failed to authenticate
-	_authenticationFailed(isServerIssue = false) {
+	_authenticationFailed(isServerIssue = false, isAPIIssue = false) {
 		this._password = null;
 
 		// New authentication session
@@ -148,6 +150,28 @@ class Authenticate {
 		// Error messages/UI
 		if (isServerIssue) {
 			this._tooltipPassword.innerText = 'Avdan OS has had some trouble reaching the authentication server. Please update your OS or contact your IT manager.';
+			this._apikeyBox.classList.add('authentication-failed');
+			this._tooltipPassword.classList.add('tooltip-error');
+			this._apikeyInputContainer.classList.add('shake');
+			setTimeout(
+				() => {
+					// Stop shaking
+					this._apikeyInputContainer.classList.remove('shake');
+				},
+				500
+			);
+		} else if (isAPIIssue) {
+			this._tooltipPassword.innerText = 'Incorrect API key.';
+			this._apikeyBox.classList.add('authentication-failed');
+			this._tooltipPassword.classList.add('tooltip-error');
+			this._apikeyInputContainer.classList.add('shake');
+			setTimeout(
+				() => {
+					// Stop shaking
+					this._apikeyInputContainer.classList.remove('shake');
+				},
+				500
+			);
 		} else {
 			this._passwordBox.classList.add('authentication-failed');
 			this._tooltipPassword.innerText = this._returnRandomErrorMessages();
