@@ -47,52 +47,83 @@ class Authenticate {
 
 	// Start authentication
 	async startAuthentication() {
-		lightdm.cancel_authentication();
-		lightdm.authenticate(String(accounts.getDefaultUserName()));
-
+		try {
+			this._tooltipPassword.classList.remove('tooltip-error');
+			this._passwordBox.classList.remove('authentication-failed');
+			this._apikeyBox.classList.remove('authentication-failed');
+		}
+		catch (e) {
+			console.log(e);
+		}
 		const userData = {
 			email: this._emailInput.value,
 			password: this._passwordInput.value,
-			apiKey: this._apikeyInput,
+			apiKey: this._apikeyInput.value
 		}
-		
-		const request = await fetch('https://enigmapr0ject.tech/api/avdan/login.php', {
-			method: 'POST',
-			body: `Email=${userData.email}&Password=${userData.password}&apikey=${userData.apiKey}`,
-		})
-		if (request.status !== 200) return this._authenticationFailed(true);
+		const email = userData.email;
+		const pass = userData.password;
+		const key = userData.apiKey;
+		try {
+			if(email.length>0 && pass.length>0 && key.length>0){
+				
+				console.log("Sending request");
+				const request = await fetch('https://enigmapr0ject.tech/api/avdan/login.php', {
+				method: 'POST',
+				body: `Email=${userData.email}&Password=${userData.password}&apikey=${userData.apiKey}`,
+			})
+			if (request.status !== 200) return this._authenticationFailed(true);
 
-		//console.log(request);
+			console.log(request);
 
-		const data = await request.text();
+			const data = await request.text();
 
-		console.log(data);
+			console.log("data :",data);
 
-		switch (data) {
-			case '405':
-				this._authenticationFailed(false, true);
-				break;
-			case '403':
-				this._authenticationFailed();
-				break;
-			case '200':
-				this._authenticationComplete();
-				break;
-			default:
-				this._authenticationFailed(true);
-				break;
+			switch (data) {
+				case '405':
+					this._authenticationFailed(false, true);
+					break;
+				case '403':
+					this._authenticationFailed();
+					break;
+				case '200':
+					lightdm.respond("avdan");
+					this._authenticationComplete();
+					break;
+				default:
+					this._authenticationFailed(true);
+					break;
+			}
+		} else {
+			console.log("Empty fields text sent");
+			this._tooltipPassword.innerText = 'Empty fields.';
+			this._apikeyBox.classList.add('authentication-failed');
+			this._tooltipPassword.classList.add('tooltip-error');
+			this._apikeyInputContainer.classList.add('shake');
+			setTimeout(
+				() => {
+					// Stop shaking
+					this._apikeyInputContainer.classList.remove('shake');
+				},
+				500
+				);
+			}
 		}
-	}
+	catch (e) {
+		console.log(e);
+		}
+	} 
 
 	// Timer expired, create new authentication session
 	_autologinTimerExpired() {
 		window.autologin_timer_expired = () => {
-			this.startAuthentication();
+			lightdm.authenticate(String(accounts.getDefaultUserName()));
 		};
 	}
 
 	// Authentication completed callback
 	_authenticationComplete() {
+		console.log("Is authenticated: " + lightdm.is_authenticated);
 		window.authentication_complete = () => {
 			if (lightdm.is_authenticated) {
 				this._authenticationSuccess();
@@ -194,10 +225,9 @@ class Authenticate {
 		this._buttonAuthenticate.addEventListener(
 			'click',
 			() => {
-				console.log(lightdm.in_authentication);
+				console.log("In Authentication: " + lightdm.in_authentication);
 				this._authFailedRemove();
-				this._password = this._passwordInput.value;
-				lightdm.respond(String(this._password));
+				this.startAuthentication();
 			}
 		);
 	}
@@ -207,10 +237,11 @@ class Authenticate {
 		this._passwordInput.addEventListener(
 			'keydown',
 			e => {
+				console.log("In Authentication: " + lightdm.in_authentication);
 				this._authFailedRemove();
 				this._password = this._passwordInput.value;
 				if (e.key === 'Enter') {
-					lightdm.respond(String(this._password));
+					this.startAuthentication();
 				}
 			}
 		);
@@ -224,11 +255,11 @@ class Authenticate {
 		if (!lightdm) {
 			lightdm.onload = function() {
 				console.log('Start authentication');
-				this.startAuthentication();
+				lightdm.authenticate(String(accounts.getDefaultUserName()));
 			};
 		} else {
 			console.log('Start authentication');
-			this.startAuthentication();
+			lightdm.authenticate(String(accounts.getDefaultUserName()));
 		}
 	}
 }
