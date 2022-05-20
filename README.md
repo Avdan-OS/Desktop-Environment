@@ -1,4 +1,4 @@
 # Nadva
 AvdanOS desktop environment
 
-Yeah i didn't have a clever name so i just took avdan but reversed. I think it looks cool tho
+Yeah I didn't have a clever name, so I just took avdan and reversed it. I think it looks cool tho
