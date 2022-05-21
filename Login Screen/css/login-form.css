@@ -123,6 +123,7 @@ label#label-user-name {
 	display:flex;
 	flex-direction:row;
 	justify-content: space-around;
+	width:15rem;
 }
 
 .button-login-form {
