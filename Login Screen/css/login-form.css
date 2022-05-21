@@ -142,10 +142,6 @@ label#label-user-name {
 	background: var(--login-form-elements-button-bg-active);
 }
 
-#button-greeter-screen.button-login-form {
-	border-radius: 50%;
-}
-
 .button-login-form-image {
 	width: 100%;
 	height: 100%;
