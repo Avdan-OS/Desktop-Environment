@@ -120,6 +120,7 @@ label#label-user-name {
 }
 
 #input-buttons-container {
+	width:15rem;
 	display:flex;
 	flex-direction:row;
 	justify-content: space-around;
