@@ -1,4 +1,6 @@
-# Nadva
+# Nadva Desktop Enviroment
 AvdanOS desktop environment
 
-Yeah I didn't have a clever name, so I just took avdan and reversed it. I think it looks cool tho
+## NOTE: THIS PROJECT IS STILL IN DEVELOPMENT, NO DEMOS AVAILABLE(yet)
+
+A fluent and consistent, new desktop environment, wrote in QML(QT 5)
