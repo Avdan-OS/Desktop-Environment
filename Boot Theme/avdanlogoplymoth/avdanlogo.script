@@ -1,0 +1,22 @@
+ # Nice colour on top of the screen fading to
+Window.SetBackgroundTopColor (0.0, 0.00, 0.0);
+
+# an equally nice colour on the bottom
+Window.SetBackgroundBottomColor (0.0, 0.00, 0.0);
+
+# Image animation loop
+for (i = 1; i < 255; i++)
+{
+  boot_image[i] = Image("boot_" + i + ".png");
+}
+boot_sprite = Sprite();
+
+progress = 1;
+
+fun refresh_callback ()
+  {
+    boot_sprite.SetImage(boot_image[Math.Int(progress / 1.2) % 255]);
+    progress++;
+  }
+
+Plymouth.SetRefreshFunction (refresh_callback);
