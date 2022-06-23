@@ -8,40 +8,96 @@
 <body>
   <div id="background-screen" class="screen background"></div>
   <div id="blank-screen" class="screen blank"></div>
+  <!-- <div id="menus-screen" class="screen">
+    <div class="content">
+      <div id="power-menu" class="menus">
+        <div class="item">
+          <img class="user-picture" src="./img/sleep.png">
+          <span>Sleep</span>
+        </div>
+        <div class="item">
+          <img class="user-picture" src="./img/hibernate.png">
+          <span>Hibernate</span>
+        </div>
+        <div class="item">
+          <img class="user-picture" src="./img/restart.png">
+          <span>Restart</span>
+        </div>
+        <div class="item">
+          <img class="user-picture" src="./img/shutdown.png">
+          <span>Shut Down</span>
+        </div>
+      </div>
+    </div>
+  </div> -->
   <div id="login-screen" class="screen login">
     <div id="login-content" class="content hide">
       <div class="dialog">
         <div class="user">
           <img class="user-picture" src="./user-picture.png">
-          <span id="user-message"></span>
           <div class="inputs">
             <input type='email' class="user-input" id='user-input-email' autocomplete='off' placeholder='Email'/>
             <input type='password' class="user-input" id='user-input-password' autocomplete='off' placeholder='Password'/>
             <input type='text' class="user-input" id='user-input-api' autocomplete='off' placeholder='API Key'/>
-            <input type='button' class="user-input" id='user-input-submit' value='Log In'/>
+            <span id="user-message"></span>
+            <div class="login-controls">
+              <div id="back-button" class="button"><img src="img/back.png"></div>
+              <input type='button' class="user-input" id='user-input-submit' value='Log In'/>
+            </div>
           </div>
           <a href="#" class="recovery-link">Forgot Password</a>
         </div>
       </div>
       <div class="system-status">
-        <span class="system-item power">
-          <img src="img/power.png" alt="">
-        </span>
-        <span class="system-item battery">
-          <img src="img/battery.png" alt="">
-        </span>
-        <span class="system-item brightness">
-          <img src="img/brightness.png" alt="">
-        </span>
-        <span class="system-item keyboard">
-          EN
-        </span>
+        <div id="power-button" class="system-item power">
+          <img src="img/power.png">
+        </div>
+        <div class="system-item revealable battery">
+          <img src="img/battery.png">
+          <span id="battery-data" class="reveal-child">50%</span>
+        </div>
+        <div class="system-item revealable brightness">
+          <img src="img/brightness.png">
+          <span id="brightness-data" class="reveal-child">50%</span>
+        </div>
+        <div id="layout-button" class="system-item layout">
+          <span id="layout-name">EN</span>
+        </div>
       </div>
       <div class="system-info fadable">
-        <span class="system-item">
-          <img src="img/session-default.png" alt="">
-        </span>
+        <div id="session-button" class="system-item session">
+          <img id="session-icon" class="icon">
+          <span id="session-name" class="name">Plasma</span>
+        </div>
         <span id="clock" class="system-item">12:34 PM</span>
+      </div>
+
+      <div id="power-menu" class="menus">
+        <div id="sleep-menu-item" class="item">
+          <img class="user-picture" src="./img/sleep.png">
+          <span>Sleep</span>
+        </div>
+        <div id="hibernate-menu-item" class="item">
+          <img class="user-picture" src="./img/hibernate.png">
+          <span>Hibernate</span>
+        </div>
+        <div id="restart-menu-item" class="item">
+          <img class="user-picture" src="./img/restart.png">
+          <span>Restart</span>
+        </div>
+        <div id="shutdown-menu-item" class="item">
+          <img class="user-picture" src="./img/shutdown.png">
+          <span>Shut Down</span>
+        </div>
+      </div>
+      <div id="layout-menu" class="menus">
+        <!-- <span class="item">en US (en)</span> -->
+      </div>
+      <div id="session-menu" class="menus">
+        <!-- <div class="item">
+          <img class="session-icon">
+          <span>Default</span>
+        </div> -->
       </div>
     </div>
   </div>
@@ -49,7 +105,7 @@
       <div class="date-time">
         <span>
           <span id="time">12:34</span>
-          <span id="time-ordinals">PM</span>
+          <span id="time-midday">PM</span>
         </span>
         <span id="date">Tuesday, June 21</span>
       </div>
@@ -58,6 +114,8 @@
 <script src="./js/debug.js"></script>
 <script src="./js/auth.js"></script>
 <script src="./js/transition.js"></script>
+<script src="./js/menus.js"></script>
+<script src="./js/power.js"></script>
 <script src="./js/lock-dialog.js"></script>
 <script src="./js/login-dialog.js"></script>
 <script src="./js/key-event.js"></script>

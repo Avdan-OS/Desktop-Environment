@@ -1,0 +1,57 @@
+.menus {
+    display: flex;
+    flex-direction: column;
+
+    z-index: 5;
+
+    background: hsla(0, 0%, 0%, 0.4);
+    border-radius: 8px;
+    padding: 4px;
+
+    position: absolute;
+    bottom: calc(48px + 12px);
+
+    visibility: hidden;
+    opacity: 0;
+
+    transform: translateY(16px);
+
+    pointer-events: unset;
+
+    transition: all var(--easeOutCubic) calc(var(--animation-speed) / 2);
+}
+.menus.show {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+.menus#power-menu,
+.menus#layout-menu {
+    left: 0;
+}
+.menus#layout-menu {
+    left: calc((48px + 10px) * 3);
+}
+.menus#layout-menu .item {
+    padding: 8px;
+}
+.menus#session-menu {
+    width: 240px;
+    right: 0;
+}
+.menus .item {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    border-radius: 6px;
+    padding: 8px;
+    cursor: pointer;
+
+    transition: all var(--easeOutCubic) var(--animation-speed);
+}
+.menus .item:hover {
+    background: hsla(0, 0%, 0%, 0.2);
+}
+.menus .item:active {
+    background: hsla(0, 0%, 0%, 0.4);
+}
