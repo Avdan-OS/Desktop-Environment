@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, viewport-fit=cover, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'">
+  <link rel="stylesheet" href="css/main.css" class="style">
+</head>
+<body>
+  <div id="background-screen" class="screen background"></div>
+  <div id="blank-screen" class="screen blank"></div>
+  <div id="login-screen" class="screen login">
+    <div id="login-content" class="content hide">
+      <div class="dialog">
+        <div class="user">
+          <img class="user-picture" src="./user-picture.png">
+          <span id="user-message"></span>
+          <div class="inputs">
+            <input type='email' class="user-input" id='user-input-email' autocomplete='off' placeholder='Email'/>
+            <input type='password' class="user-input" id='user-input-password' autocomplete='off' placeholder='Password'/>
+            <input type='text' class="user-input" id='user-input-api' autocomplete='off' placeholder='API Key'/>
+            <input type='button' class="user-input" id='user-input-submit' value='Log In'/>
+          </div>
+          <a href="#" class="recovery-link">Forgot Password</a>
+        </div>
+      </div>
+      <div class="system-status">
+        <span class="system-item power">
+          <img src="img/power.png" alt="">
+        </span>
+        <span class="system-item battery">
+          <img src="img/battery.png" alt="">
+        </span>
+        <span class="system-item brightness">
+          <img src="img/brightness.png" alt="">
+        </span>
+        <span class="system-item keyboard">
+          EN
+        </span>
+      </div>
+      <div class="system-info fadable">
+        <span class="system-item">
+          <img src="img/session-default.png" alt="">
+        </span>
+        <span id="clock" class="system-item">12:34 PM</span>
+      </div>
+    </div>
+  </div>
+  <div id="lock-screen" class="screen lock">
+      <div class="date-time">
+        <span>
+          <span id="time">12:34</span>
+          <span id="time-ordinals">PM</span>
+        </span>
+        <span id="date">Tuesday, June 21</span>
+      </div>
+  </div>
+</body>
+<script src="./js/debug.js"></script>
+<script src="./js/auth.js"></script>
+<script src="./js/transition.js"></script>
+<script src="./js/lock-dialog.js"></script>
+<script src="./js/login-dialog.js"></script>
+<script src="./js/key-event.js"></script>
+</html>

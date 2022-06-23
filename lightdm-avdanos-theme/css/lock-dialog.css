@@ -1,0 +1,31 @@
+.lock {
+    pointer-events: unset;
+    transition: all var(--easeOutCubic) var(--animation-speed);
+}
+
+.lock.hide {
+    /* top: -100%; */
+    pointer-events: none;
+}
+
+.lock .date-time {
+    display: flex;
+    flex-direction: column;
+    text-shadow: 0 0 32px hsla(0, 0%, 0%, 0.4);
+}
+
+.lock .date-time #time {
+    font-size: 8rem;
+    font-weight: 500;
+    line-height: 1.25;
+}
+.lock .date-time #time-ordinals {
+    font-size: 4rem;
+    font-weight: 500;
+    line-height: 1;
+    margin-left: 24px;
+}
+.lock .date-time #date {
+    font-size: 2rem;
+    font-weight: 500;
+}

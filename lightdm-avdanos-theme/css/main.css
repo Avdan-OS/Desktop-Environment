@@ -1,0 +1,41 @@
+@import url('normalize.css');
+@import url('inter.css');
+@import url('easings.css');
+@import url('screen.css');
+@import url('lock-dialog.css');
+@import url('login-dialog.css');
+
+:root {
+    --background-color: black;
+    --foreground-color: whitesmoke;
+    --animation-speed: 0.5s;
+    --blur-strength: 16px;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	position: fixed;
+
+    font-size: 1rem;
+    font-family: 'Inter', 'Roboto', sans-serif;
+}
+
+body {
+	top: 0;
+	left: 0;
+
+	width: 100%;
+	height: 100%;
+
+	margin: 0;
+	padding: 0;
+
+	overflow: hidden;
+	scrollbar-width: none;
+
+    color: var(--foreground-color);
+	background-color: var(--background-color);
+}
