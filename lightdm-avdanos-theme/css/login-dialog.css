@@ -1,5 +1,4 @@
 .login .content .dialog {
-    /* height: 100%; */
     width: 100%;
     display: flex;
     align-items: center;
@@ -28,8 +27,6 @@
     gap: 24px;
 
     width: 200px;
-
-    /* margin-inline: 50px; */
 }
 
 .login .content .dialog .user .inputs {
@@ -99,10 +96,6 @@
     transition-duration: 0s;
     box-shadow: inset 0 0 0 999px hsla(0, 0%, 100%, 0.2);
 }
-/* @keyframes flash {
-    0% { box-shadow: inset 0 0 0 999px hsla(0, 0%, 100%, 0.2); }
-    100% { box-shadow: transparent; }
-} */
 .login .content .dialog .user .user-input:focus {
     outline-width: 2px;
     outline-color: hsla(0, 0%, 100%, 0.5);
@@ -145,13 +138,6 @@
     position: absolute;
     bottom: 0;
 }
-/* .login .system-status .item {
-    background: hsla(0, 0%, 0%, 0.4);
-
-    width: 48px;
-    height: 48px;
-    border-radius: 999px;
-} */
 
 .login .system-item {
     display: flex;

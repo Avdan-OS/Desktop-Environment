@@ -99,6 +99,7 @@ var LockDialog = {
     show() {
         lockScreen.classList.remove('hide');
         backgroundScreen.classList.remove('blur');
+
         // Close all menus
         Menus.closeAllMenus();
     }

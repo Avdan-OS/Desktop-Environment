@@ -4,7 +4,6 @@
 }
 
 .lock.hide {
-    /* top: -100%; */
     pointer-events: none;
 }
 

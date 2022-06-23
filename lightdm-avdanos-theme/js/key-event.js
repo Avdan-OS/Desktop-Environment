@@ -7,7 +7,6 @@ var KeyEvent = {
 
             if (event.key === 'Escape') {
                 event.preventDefault();
-
                 Transition.hideLogin();
             }
         });

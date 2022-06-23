@@ -159,16 +159,6 @@ class Auth {
                         this.failed();
                         break;
                 }
-            } else {
-                console.log("Empty fields text sent");
-                // this._tooltipPassword.innerText = 'Empty fields.';
-                // this._apikeyBox.classList.add('authentication-failed');
-                // this._tooltipPassword.classList.add('tooltip-error');
-                // this._apikeyInputContainer.classList.add('shake');
-                setTimeout(() => {
-                    // Stop shaking
-                    // this._apikeyInputContainer.classList.remove('shake');
-                }, 500 )
             }
 		} catch (e) {
             console.log(e);
