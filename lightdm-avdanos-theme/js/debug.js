@@ -27,6 +27,12 @@ var Debug = {
 				can_hibernate: true,
 				can_shutdown: true,
 				can_restart: true,
+				batteryData: {
+					name: "Battery 0",
+					level: 85,
+					state: "Discharging"
+				},
+				brightness: 50,
 				sessions: [
 					{
 						name: 'awesome wm',
@@ -107,6 +113,34 @@ var Debug = {
 						code: 'en_US.utf8'
 					}
 				],
+				layout: {
+					name: "us",
+					description: "English (US)",
+					short_description: "en"
+				},
+				layouts: [
+					{
+						name: "us",
+						description: "English (US)",
+						short_description: "en"
+					},
+					{
+						name: "at",
+						description: "German (Austria)",
+						short_description: "de"
+					},
+					{
+						name: "uk",
+						description: "English (UK)",
+						short_description: "en"
+					}
+				],
+				battery_update: {
+					connect: (callback) => { callback() }
+				},
+				brightness_update: {
+					connect: (callback) => { callback() }
+				},
 				language: 'American English',
 				authenticate: username => {
 					console.log(`Starting authenticating user: '${username}'`);

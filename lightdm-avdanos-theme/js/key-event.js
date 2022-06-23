@@ -2,15 +2,13 @@ var KeyEvent = {
     start() {
         document.addEventListener("keydown", (event) => {
             if ((event.key === ' ') || (event.code === 'Space') || (event.code === 'Enter') || (event.code === 'Tab')) {
-                LockDialog.hide();
-                LoginDialog.show();
+                Transition.showLogin();
             }
 
             if (event.key === 'Escape') {
                 event.preventDefault();
 
-                LockDialog.show();
-                LoginDialog.hide();
+                Transition.hideLogin();
             }
         });
     }
