@@ -3,6 +3,8 @@ var passwordInput = document.getElementById('user-input-password');
 var apiInput = document.getElementById('user-input-api');
 var userMessage = document.getElementById('user-message');
 
+var loginButton = document.getElementById("user-input-submit");
+
 const LoginFailedIssue = {
     "SERVER": 0,
     "API": 1,
@@ -18,26 +20,38 @@ class Auth {
 		// Error messages/UI
         switch (failedIssue) {
             case LoginFailedIssue.SERVER:
-                userMessage.innerText = 'Avdan OS has had some trouble reaching the authentication server. Please update your OS or contact your IT manager.';
+                this.setMessage("Avdan OS has had some trouble reaching the authentication server. Please update your OS or contact your IT manager.");
                 this.animateShake(apiInput);
                 break;
 
             case LoginFailedIssue.API:
-                userMessage.innerText = 'Incorrect API key.';
+                this.setMessage("Incorrect API key.");
                 this.animateShake(apiInput);
                 break;
 
             case LoginFailedIssue.AUTH:
-                userMessage.innerText = 'Incorrect Password.';
+                this.setMessage("Incorrect Password.");
                 this.animateShake(passwordInput);
                 break;
 
             default:
-                userMessage.innerText = 'An error occurred.';
+                this.setMessage("An error occurred.");
                 this.animateShake(emailInput);
                 this.animateShake(passwordInput);
                 this.animateShake(apiInput);
         }
+
+        loginButton.disabled = false;
+    }
+
+    setMessage(message = "") {
+        if (message) {
+            userMessage.classList.add('reveal');
+            userMessage.innerText = message;
+        } else {
+            userMessage.classList.remove('reveal');
+        }
+
     }
 
     animateShake(element) {
@@ -52,17 +66,17 @@ class Auth {
     checkInputAvailability(userData) {
         if (userData.email.length == 0) {
             this.animateShake(emailInput);
-            userMessage.innerText = 'Email must be filled.';
+            this.setMessage('Email must be filled.');
             return false;
         }
         if (userData.password.length == 0) {
             this.animateShake(passwordInput);
-            userMessage.innerText = 'Password must be filled.';
+            this.setMessage('Password must be filled.');
             return false;
         }
         if (userData.apiKey.length == 0) {
             this.animateShake(apiInput);
-            userMessage.innerText = 'API key must be filled.';
+            this.setMessage('API key must be filled.');
             return false;
         }
 
@@ -106,11 +120,13 @@ class Auth {
 
         if (!availability) { return; }
 
+        loginButton.disabled = true;
+
 		const email = userData.email;
 		const pass = userData.password;
 		const key = userData.apiKey;
 
-        userMessage.innerText = '';
+        this.setMessage();
 
 		try {
 			if (email.length > 0 && pass.length > 0 && key.length > 0) {
