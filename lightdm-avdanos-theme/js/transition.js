@@ -6,6 +6,14 @@ var Transition = {
     fadeOut() {
         let blankScreen = document.getElementById("blank-screen");
         blankScreen.classList.remove('hide')
+    },
+    showLogin() {
+        LockDialog.hide();
+        LoginDialog.show();
+    },
+    hideLogin() {
+        LockDialog.show();
+        LoginDialog.hide();
     }
 }
 
