@@ -89,7 +89,7 @@
     background: hsla(0, 0%, 0%, 0.4);
     box-shadow: transparent;
 }
-.login .content .dialog .user .user-input[type=button]:disabled,
+.login .content .dialog .user .user-input:disabled,
 .login .content .dialog .user .button:disabled {
     opacity: .5;
 }

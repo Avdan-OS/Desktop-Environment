@@ -22,33 +22,36 @@ var loginScreen = document.getElementById("login-screen");
 const Menus = {
   start() {
     loginScreen.addEventListener("click", this.closeAllMenus);
-    clockMenu.addEventListener("click", (e) => {
-      e.stopPropagation();
+    clockMenu.addEventListener("click", (event) => {
+      event.stopPropagation();
     });
-    powerButton.addEventListener("click", (e) => {
-      e.stopPropagation();
+    powerButton.addEventListener("click", (event) => {
+      event.stopPropagation();
       this.toggleMenus(powerMenu);
     });
-    brightnessButton.addEventListener('click', (e) => {
-      e.stopPropagation();
+    brightnessButton.addEventListener('click', (event) => {
+      event.stopPropagation();
       this.toggleMenus(brightnessMenu);
     });
-    layoutButton.addEventListener("click", (e) => {
-      e.stopPropagation();
+    layoutButton.addEventListener("click", (event) => {
+      event.stopPropagation();
       this.toggleMenus(layoutMenu);
     });
-    sessionButton.addEventListener("click", (e) => {
-      e.stopPropagation();
+    sessionButton.addEventListener("click", (event) => {
+      event.stopPropagation();
       this.toggleMenus(sessionMenu);
     });
-    clockButton.addEventListener("click", (e) => {
-      e.stopPropagation();
+    clockButton.addEventListener("click", (event) => {
+      event.stopPropagation();
       this.toggleMenus(clockMenu);
     });
 
     this._setBrightness(lightdm.brightness, false);
     brightnessSlider.addEventListener('input', () => {
-        this._setBrightness(brightnessSlider.value, true);
+      this._setBrightness(brightnessSlider.value, true);
+    })
+    brightnessSlider.addEventListener('click', (event) => {
+      event.stopPropagation();
     })
 
     this._loadLayouts();
