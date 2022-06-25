@@ -1,4 +1,9 @@
 .lock {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: calc(100px + 48px);
+
     pointer-events: unset;
     transition: all var(--easeOutCubic) var(--animation-speed);
 }

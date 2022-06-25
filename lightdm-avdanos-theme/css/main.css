@@ -54,7 +54,9 @@ a:hover {
 
 .switcher {
     display: flex;
+    gap: 2px;
     overflow: hidden;
+
     border-radius: 6px;
 
     background: hsla(0, 0%, 100%, .1);

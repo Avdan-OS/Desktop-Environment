@@ -6,7 +6,7 @@
 
     background: hsla(0, 0%, 0%, 0.4);
     border-radius: 8px;
-    padding: 4px;
+    padding: 8px;
 
     position: absolute;
     bottom: calc(48px + 12px);
