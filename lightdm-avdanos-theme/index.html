@@ -47,7 +47,7 @@
           <img id="session-icon" class="icon">
           <span id="session-name" class="name">Plasma</span>
         </div>
-        <span id="clock" class="system-item">12:34 PM</span>
+        <span id="clock-button" class="system-item clock">12:34 PM</span>
       </div>
 
       <div id="power-menu" class="menus">
@@ -70,6 +70,17 @@
       </div>
       <div id="layout-menu" class="menus"></div>
       <div id="session-menu" class="menus"></div>
+      <div id="clock-menu" class="menus">
+        <span class="clock">12:34</span>
+        <span class="date"></span>
+        <div id="format">
+          <span>Time Format:</span>
+          <div class="switcher">
+            <span id="time-12h-format-button" class="item active">12h</span>
+            <span id="time-24h-format-button" class="item">24h</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div id="lock-screen" class="screen lock">
@@ -78,7 +89,7 @@
           <span id="time">12:34</span>
           <span id="time-midday">PM</span>
         </span>
-        <span id="date">Tuesday, June 21</span>
+        <span class="date">Tuesday, June 21</span>
       </div>
   </div>
   <div id="popup-screen" class="screen popup hide">
@@ -97,6 +108,7 @@
 <script src="./js/transition.js"></script>
 <script src="./js/menus.js"></script>
 <script src="./js/power.js"></script>
+<script src="./js/clock.js"></script>
 <script src="./js/popup-dialog.js"></script>
 <script src="./js/lock-dialog.js"></script>
 <script src="./js/login-dialog.js"></script>

@@ -25,20 +25,7 @@
     opacity: 1;
     transform: translateY(0);
 }
-.menus#power-menu,
-.menus#layout-menu {
-    left: 0;
-}
-.menus#layout-menu {
-    left: calc((48px + 10px) * 3);
-}
-.menus#layout-menu .item {
-    padding: 8px;
-}
-.menus#session-menu {
-    width: 240px;
-    right: 0;
-}
+
 .menus .item {
     display: flex;
     gap: 12px;
@@ -50,8 +37,44 @@
     transition: all var(--easeOutCubic) var(--animation-speed);
 }
 .menus .item:hover {
-    background: hsla(0, 0%, 0%, 0.2);
+    background: hsla(0, 0%, 100%, 0.1);
 }
 .menus .item:active {
-    background: hsla(0, 0%, 0%, 0.4);
+    background: hsla(0, 0%, 100%, 0.2);
+}
+
+.menus#power-menu,
+.menus#layout-menu {
+    left: 0;
+}
+.menus#layout-menu {
+    left: calc((48px + 10px) * 3);
+}
+.menus#layout-menu .item {
+    padding: 8px;
+}
+.menus#clock-menu {
+    right: 0;
+    width: 240px;
+    padding: 20px;
+    gap: 8px;
+}
+.menus#clock-menu .clock {
+    font-size: 2rem;
+    font-weight: bold;
+}
+.menus#clock-menu .date {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+.menus#clock-menu #format {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: 8px;
+}
+.menus#session-menu {
+    width: 240px;
+    right: 0;
 }

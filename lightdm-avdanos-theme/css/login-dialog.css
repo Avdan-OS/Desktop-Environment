@@ -193,7 +193,7 @@
     bottom: 0;
     right: 0;
 }
-.login .system-item#clock {
+.login .system-item.clock {
     padding-inline: 16px;
 
     line-height: 2;

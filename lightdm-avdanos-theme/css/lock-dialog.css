@@ -24,7 +24,7 @@
     line-height: 1;
     margin-left: 24px;
 }
-.lock .date-time #date {
+.lock .date-time .date {
     font-size: 2rem;
     font-weight: 500;
 }

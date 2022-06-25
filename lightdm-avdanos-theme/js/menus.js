@@ -10,6 +10,9 @@ var sessionButton = document.getElementById("session-button");
 var sessionName = document.getElementById("session-name");
 var sessionIcon = document.getElementById("session-icon");
 
+var clockMenu = document.getElementById("clock-menu");
+var clockButton = document.getElementById("clock-button");
+
 var Menus = {
     start() {
         powerButton.addEventListener('click', () => {
@@ -20,6 +23,9 @@ var Menus = {
         });
         sessionButton.addEventListener('click', () => {
             this.toggleMenus(sessionMenu);
+        });
+        clockButton.addEventListener('click', () => {
+            this.toggleMenus(clockMenu);
         });
 
         this._loadLayouts();
@@ -40,6 +46,7 @@ var Menus = {
         powerMenu.classList.remove('show');
         layoutMenu.classList.remove('show');
         sessionMenu.classList.remove('show');
+        clockMenu.classList.remove('show');
     },
     toggleMenus(menus) {
         if (!menus.classList.contains('show')) {
