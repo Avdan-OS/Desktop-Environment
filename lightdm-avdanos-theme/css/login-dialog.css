@@ -60,6 +60,9 @@
 
     transition: all calc(var(--animation-speed) / 2);
 }
+.login .content .dialog .user .user-input::placeholder {
+    color: hsla(0, 0%, 100%, 0.6);
+}
 .login .content .dialog .user .button {
     padding: 12px;
     line-height: 0;

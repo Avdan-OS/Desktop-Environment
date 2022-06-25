@@ -43,15 +43,27 @@
     background: hsla(0, 0%, 100%, 0.2);
 }
 
-.menus#power-menu,
-.menus#layout-menu {
+.menus#power-menu {
     left: 0;
+}
+.menus#brightness-menu {
+    left: calc((48px + 10px) * 2);
+    padding: 12px;
+}
+.menus#brightness-menu .list {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 .menus#layout-menu {
     left: calc((48px + 10px) * 3);
 }
 .menus#layout-menu .item {
     padding: 8px;
+}
+.menus#session-menu {
+    width: 240px;
+    right: 0;
 }
 .menus#clock-menu {
     right: 0;
@@ -73,8 +85,4 @@
     justify-content: space-between;
 
     margin-top: 8px;
-}
-.menus#session-menu {
-    width: 240px;
-    right: 0;
 }

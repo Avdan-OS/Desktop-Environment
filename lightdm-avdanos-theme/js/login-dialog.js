@@ -5,7 +5,8 @@ var backButton = document.getElementById("back-button");
 var loginButton = document.getElementById("user-input-submit");
 
 var batteryData = document.getElementById("battery-data");
-var brightnessData = document.getElementById("brightness-data");
+var brightnessData = document.getElementsByClassName("brightness-data");
+var brightnessSlider = document.getElementById("brightness-slider");
 
 var batteryBar = document.getElementById("battery-bar");
 
@@ -32,15 +33,21 @@ var LoginDialog = {
         this.updateBatteryData();
         this.updateBrightnessData();
 
-        lightdm.battery_update.connect(this.updateBatteryData);
-        lightdm.brightness_update.connect(this.updateBrightnessData);
+        lightdm.battery_update = this.updateBatteryData;
+        lightdm.brightness_update = this.updateBrightnessData;
     },
     updateBatteryData() {
         batteryData.innerText = `${lightdm.batteryData.level}%`;
         batteryBar.style.width = `${17 * (lightdm.batteryData.level / 100)}px`;
     },
     updateBrightnessData() {
-        brightnessData.innerText = `${lightdm.brightness}%`;
+        let value = lightdm.brightness;
+
+        Array.from(brightnessData).forEach((data) => {
+            data.innerText = `${value}%`;
+        });
+
+        brightnessSlider.value = value;
     },
     hide() {
         loginScreenContent.classList.add('hide');

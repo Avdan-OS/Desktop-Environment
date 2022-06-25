@@ -6,9 +6,12 @@
   <link rel="stylesheet" href="css/main.css" class="style">
 </head>
 <body>
+  <!-- Background Screen -->
   <div id="background-screen" class="screen background"></div>
+  <!-- Login Screen -->
   <div id="login-screen" class="screen login">
     <div id="login-content" class="content hide">
+      <!-- Login Dialog -->
       <div class="dialog">
         <div class="user">
           <img class="user-picture" src="./user-picture.png">
@@ -25,6 +28,8 @@
           <a href="javascript:PopupDialog.show();" class="recovery-link">Forgot Password</a>
         </div>
       </div>
+
+      <!-- System Status -->
       <div class="system-status">
         <div id="power-button" class="system-item power">
           <img src="img/power.png">
@@ -36,14 +41,16 @@
           </div>
           <span id="battery-data" class="reveal-child">50%</span>
         </div>
-        <div class="system-item revealable brightness">
+        <div id="brightness-button" class="system-item revealable brightness">
           <img src="img/brightness.png">
-          <span id="brightness-data" class="reveal-child">50%</span>
+          <span class="brightness-data reveal-child">50%</span>
         </div>
         <div id="layout-button" class="system-item layout fadable">
           <span id="layout-name">EN</span>
         </div>
       </div>
+
+      <!-- System Info -->
       <div class="system-info fadable">
         <div id="session-button" class="system-item session">
           <img id="session-icon" class="icon">
@@ -52,6 +59,7 @@
         <span id="clock-button" class="system-item clock">12:34 PM</span>
       </div>
 
+      <!-- Menus -->
       <div id="power-menu" class="menus">
         <div id="sleep-menu-item" class="item">
           <img class="user-picture" src="./img/sleep.png">
@@ -70,6 +78,12 @@
           <span>Shut Down</span>
         </div>
       </div>
+      <div id="brightness-menu" class="menus">
+        <div class="list">
+          <input id="brightness-slider" type="range" name="brightness">
+          <span class="brightness-data">50%</span>
+        </div>
+      </div>
       <div id="layout-menu" class="menus"></div>
       <div id="session-menu" class="menus"></div>
       <div id="clock-menu" class="menus">
@@ -85,6 +99,7 @@
       </div>
     </div>
   </div>
+  <!-- Lock Screen -->
   <div id="lock-screen" class="screen lock">
       <div class="date-time">
         <span>
@@ -94,6 +109,7 @@
         <span class="date">Tuesday, June 21</span>
       </div>
   </div>
+  <!-- Popup Screen -->
   <div id="popup-screen" class="screen popup hide">
     <div class="dialog">
       <img id="popup-close" src="./img/close.png" class="close">
@@ -104,8 +120,10 @@
       </a>
     </div>
   </div>
+  <!-- Blank/Black Screen -->
   <div id="blank-screen" class="screen blank"></div>
 </body>
+<!-- Some scripts -->
 <script src="./js/debug.js"></script>
 <script src="./js/auth.js"></script>
 <script src="./js/transition.js"></script>

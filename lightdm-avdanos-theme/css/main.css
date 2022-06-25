@@ -79,3 +79,41 @@ a:hover {
 .switcher .item.active {
     background: hsla(0, 0%, 100%, .1);
 }
+
+input[type="range"] {
+    appearance: none;
+    background: transparent;
+
+    --webkitProgressPercent: 0%;
+}
+
+input[type="range"]::-webkit-range-runnable-track,
+input[type="range"]::-moz-range-track {
+    background: hsla(0, 0%, 100%, .1);
+    background-image: linear-gradient(
+        90deg,
+        #3f79f1 var(--webkitProgressPercent),
+        hsla(0, 0%, 100%, .1) var(--webkitProgressPercent)
+    );
+    height: 6px;
+    border-radius: 99px;
+}
+input[type="range"]::-moz-range-progress,
+input[type="range"]::-ms-fill-lower {
+    appearance: none;
+    height: 6px;
+    border-radius: 99px;
+    background: #3f79f1;
+}
+input[type="range"]::-webkit-range-thumb,
+input[type="range"]::-moz-range-thumb {
+    appearance: none;
+
+    height: 16px;
+    width: 16px;
+
+    background: hsla(0, 0%, 100%);
+    border: none;
+
+    border-radius: 99px;
+}

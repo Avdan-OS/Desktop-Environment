@@ -1,6 +1,10 @@
 var powerMenu = document.getElementById("power-menu");
 var powerButton = document.getElementById("power-button");
 
+var brightnessMenu = document.getElementById("brightness-menu");
+var brightnessButton = document.getElementById("brightness-button");
+var brightnessSlider = document.getElementById("brightness-slider");
+
 var layoutMenu = document.getElementById("layout-menu");
 var layoutButton = document.getElementById("layout-button");
 var layoutName = document.getElementById("layout-name");
@@ -18,6 +22,9 @@ var Menus = {
         powerButton.addEventListener('click', () => {
             this.toggleMenus(powerMenu);
         });
+        brightnessButton.addEventListener('click', () => {
+            this.toggleMenus(brightnessMenu);
+        });
         layoutButton.addEventListener('click', () => {
             this.toggleMenus(layoutMenu);
         });
@@ -27,6 +34,11 @@ var Menus = {
         clockButton.addEventListener('click', () => {
             this.toggleMenus(clockMenu);
         });
+
+        this._setBrightness(lightdm.brightness, false);
+        brightnessSlider.addEventListener('input', () => {
+            this._setBrightness(brightnessSlider.value, true);
+        })
 
         this._loadLayouts();
         this._setLayout(
@@ -44,6 +56,7 @@ var Menus = {
     },
     closeAllMenus() {
         powerMenu.classList.remove('show');
+        brightnessMenu.classList.remove('show');
         layoutMenu.classList.remove('show');
         sessionMenu.classList.remove('show');
         clockMenu.classList.remove('show');
@@ -54,6 +67,14 @@ var Menus = {
             menus.classList.add('show');
         } else {
             menus.classList.remove('show');
+        }
+    },
+
+    _setBrightness(value, update = true) {
+        brightnessSlider.value = value;
+
+        if (update) {
+            lightdm.brightness = value;
         }
     },
 
