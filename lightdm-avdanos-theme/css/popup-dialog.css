@@ -3,8 +3,6 @@
     align-items: center;
     justify-content: center;
 
-    padding-inline: 32%;
-
     backdrop-filter: blur(var(--blur-strength));
 
     background: hsla(0, 0%, 0%, .4);
@@ -25,6 +23,8 @@
     flex-direction: column;
     align-items: center;
     gap: 16px;
+
+    max-width: 480px;
 
     padding: 40px;
 
