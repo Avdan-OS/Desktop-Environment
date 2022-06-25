@@ -168,16 +168,17 @@
 .login .system-item.revealable * {
     transition: all calc(var(--animation-speed) / 2);
 }
-.login .system-item.revealable span {
+.login .system-item.revealable > span {
     position: absolute;
     left: 0;
     opacity: 0;
     padding: 8px;
 }
-.login .system-item.revealable:hover img {
+.login .system-item.revealable:hover > img,
+.login .system-item.revealable:hover > .indicator {
     opacity: 0;
 }
-.login .system-item.revealable:hover span {
+.login .system-item.revealable:hover > span {
     opacity: 1;
 }
 .login .system-item.layout span {
@@ -209,4 +210,29 @@
 .menus#session-menu .icon {
     width: 32px;
     height: 32px;
+}
+.login .system-item.battery .indicator {
+    display: inline-block;
+
+    position: relative;
+    width: 32px;
+    height: 32px;
+}
+.login .system-item.battery .indicator * {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+
+    padding: 0 !important;
+}
+.login .system-item.battery .indicator .bar {
+    width: 17px;
+    height: 10px;
+
+    top: 11px;
+    left: 6px;
+
+    border-radius: 1px;
+
+    background: white;
 }

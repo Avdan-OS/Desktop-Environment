@@ -7,6 +7,8 @@ var loginButton = document.getElementById("user-input-submit");
 var batteryData = document.getElementById("battery-data");
 var brightnessData = document.getElementById("brightness-data");
 
+var batteryBar = document.getElementById("battery-bar");
+
 var LoginDialog = {
     start() {
         lockScreen.addEventListener("click", Transition.showLogin);
@@ -21,6 +23,7 @@ var LoginDialog = {
     },
     updateBatteryData() {
         batteryData.innerText = `${lightdm.batteryData.level}%`;
+        batteryBar.style.width = `${17 * (lightdm.batteryData.level / 100)}px`;
     },
     updateBrightnessData() {
         brightnessData.innerText = `${lightdm.brightness}%`;

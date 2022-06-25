@@ -7,7 +7,9 @@
 
     backdrop-filter: blur(var(--blur-strength));
 
-    background: hsla(0, 0%, 0%, .5);
+    background: hsla(0, 0%, 0%, .4);
+
+    transition: all var(--easeOutCubic) calc(var(--animation-speed) / 2);
 }
 
 .screen.popup.hide {
