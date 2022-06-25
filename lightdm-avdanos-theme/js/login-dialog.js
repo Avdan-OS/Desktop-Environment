@@ -15,46 +15,46 @@ var passwordInput = document.getElementById('user-input-password');
 var apiInput = document.getElementById('user-input-api');
 
 var LoginDialog = {
-    start() {
-        lockScreen.addEventListener("click", Transition.showLogin);
-        backButton.addEventListener("click", Transition.hideLogin);
-        loginButton.addEventListener("click", auth.startAuthentication.bind(auth));
+  start() {
+    lockScreen.addEventListener("click", Transition.showLogin);
+    backButton.addEventListener("click", Transition.hideLogin);
+    loginButton.addEventListener("click", auth.startAuthentication.bind(auth));
 
-        emailInput.addEventListener("keydown", (event) => {
-            if (event.code === 'Enter') { passwordInput.focus(); }
-        });
-        passwordInput.addEventListener("keydown", (event) => {
-            if (event.code === 'Enter') { apiInput.focus(); }
-        });
-        apiInput.addEventListener("keydown", (event) => {
-            if (event.code === 'Enter') { auth.startAuthentication() }
-        });
+    emailInput.addEventListener("keydown", (event) => {
+      if (event.code === 'Enter') { passwordInput.focus(); }
+    });
+    passwordInput.addEventListener("keydown", (event) => {
+      if (event.code === 'Enter') { apiInput.focus(); }
+    });
+    apiInput.addEventListener("keydown", (event) => {
+      if (event.code === 'Enter') { auth.startAuthentication() }
+    });
 
-        this.updateBatteryData();
-        this.updateBrightnessData();
+    this.updateBatteryData();
+    this.updateBrightnessData();
 
-        lightdm.battery_update = this.updateBatteryData;
-        lightdm.brightness_update = this.updateBrightnessData;
-    },
-    updateBatteryData() {
-        batteryData.innerText = `${lightdm.batteryData.level}%`;
-        batteryBar.style.width = `${17 * (lightdm.batteryData.level / 100)}px`;
-    },
-    updateBrightnessData() {
-        let value = lightdm.brightness;
+    lightdm.battery_update = this.updateBatteryData;
+    lightdm.brightness_update = this.updateBrightnessData;
+  },
+  updateBatteryData() {
+    batteryData.innerText = `${lightdm.batteryData.level}%`;
+    batteryBar.style.width = `${17 * (lightdm.batteryData.level / 100)}px`;
+  },
+  updateBrightnessData() {
+    let value = lightdm.brightness;
 
-        Array.from(brightnessData).forEach((data) => {
-            data.innerText = `${value}%`;
-        });
+    Array.from(brightnessData).forEach((data) => {
+      data.innerText = `${value}%`;
+    });
 
-        brightnessSlider.value = value;
-    },
-    hide() {
-        loginScreenContent.classList.add('hide');
-    },
-    show() {
-        loginScreenContent.classList.remove('hide');
-    }
+    brightnessSlider.value = value;
+  },
+  hide() {
+    loginScreenContent.classList.add('hide');
+  },
+  show() {
+    loginScreenContent.classList.remove('hide');
+  }
 }
 
 LoginDialog.start();

@@ -176,17 +176,12 @@ var Debug = {
 			};
 		}
 
-		// window.lightdm.watch('change', (id, oldval, newval) => {
-		// 	console.log(id);
-		// 	// lightdm.battery_update();
-		// 	return newval;
-		// })
 		window.lightdm = new Proxy(window.lightdm, {
 			set: function (target, key, value) {
 				target[key] = value;
 
 				if (key == 'brightness') {
-					target.brightness_update();
+								target.brightness_update();
 				}
 
 				return true;
@@ -197,16 +192,12 @@ var Debug = {
 				target[key] = value;
 
 				if (key == 'level') {
-					window.lightdm.battery_update();
+								window.lightdm.battery_update();
 				}
 
 				return true;
 			}
 		});
-		// window.lightdm.brightness.watch('change', (id, oldval, newval) => {
-		// 	lightdm.brightness_update();
-		// 	return newval;
-		// })
 	}
 }
 
