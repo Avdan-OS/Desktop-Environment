@@ -13,4 +13,4 @@ var KeyEvent = {
     }
 }
 
-KeyEvent.start();
+window.addEventListener("load", KeyEvent.start);
