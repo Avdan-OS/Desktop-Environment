@@ -103,9 +103,9 @@ var Clock = {
 
         this.startClock();
     },
-    setDateTime() {
+    setClock() {
+        // Time
         let timeVal = getTime(timeFormat == TIME_FORMAT['12']);
-
         let midday = (timeVal.midDay) ? timeVal.midDay : '';
         time.innerText = `${timeVal.hour}:${timeVal.minute}`;
         Array.from(clocks).forEach((clock) => {
@@ -113,14 +113,15 @@ var Clock = {
         })
         timeMidday.innerText = midday;
 
+        // Date
         let dateVal = getDate();
         Array.from(dates).forEach((date) => {
             date.innerText = `${dateVal.day}, ${dateVal.month} ${dateVal.date}`
         })
     },
     startClock() {
-        this.setDateTime();
-		clockInterval = setInterval(this.setDateTime, 1000);
+        this.setClock();
+		clockInterval = setInterval(this.setClock, 1000);
     },
     stopClock() {
         clearInterval(clockInterval);

@@ -18,7 +18,9 @@
     opacity: 1;
     transition: all var(--easeOutCubic) var(--animation-speed);
 }
-
+.screen.hide {
+    opacity: 0;
+}
 .screen .content {
     display: flex;
 
@@ -27,17 +29,13 @@
     height: 100%;
 }
 
-.screen.hide {
-    opacity: 0;
-}
-
 .screen.blank {
     background: var(--background-color);
-    z-index: 10;
 }
 .screen.blank.hide {
     pointer-events: none;
 }
+
 .screen.menus {
     z-index: 10;
 }

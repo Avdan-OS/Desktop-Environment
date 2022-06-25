@@ -9,11 +9,25 @@ var brightnessData = document.getElementById("brightness-data");
 
 var batteryBar = document.getElementById("battery-bar");
 
+var emailInput = document.getElementById('user-input-email');
+var passwordInput = document.getElementById('user-input-password');
+var apiInput = document.getElementById('user-input-api');
+
 var LoginDialog = {
     start() {
         lockScreen.addEventListener("click", Transition.showLogin);
         backButton.addEventListener("click", Transition.hideLogin);
         loginButton.addEventListener("click", auth.startAuthentication.bind(auth));
+
+        emailInput.addEventListener("keydown", (event) => {
+            if (event.code === 'Enter') { passwordInput.focus(); }
+        });
+        passwordInput.addEventListener("keydown", (event) => {
+            if (event.code === 'Enter') { apiInput.focus(); }
+        });
+        apiInput.addEventListener("keydown", (event) => {
+            if (event.code === 'Enter') { auth.startAuthentication() }
+        });
 
         this.updateBatteryData();
         this.updateBrightnessData();

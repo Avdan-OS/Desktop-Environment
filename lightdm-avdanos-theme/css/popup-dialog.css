@@ -11,7 +11,6 @@
 
     transition: all var(--easeOutCubic) calc(var(--animation-speed) / 2);
 }
-
 .screen.popup.hide {
     backdrop-filter: blur(0);
     background: transparent;
@@ -39,10 +38,9 @@
     transition: all var(--easeOutCubic) calc(var(--animation-speed) / 2);
 }
 .screen.popup.hide .dialog {
-    transform: scale(.8);
+    transform: scale(.9);
     opacity: 0;
 }
-
 .screen.popup .dialog .title {
     font-size: 2rem;
     font-weight: bold;

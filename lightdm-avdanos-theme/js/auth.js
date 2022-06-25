@@ -20,7 +20,7 @@ class Auth {
 		// Error messages/UI
         switch (failedIssue) {
             case LoginFailedIssue.SERVER:
-                this.setMessage("Avdan OS has had some trouble reaching the authentication server. Please update your OS or contact your IT manager.");
+                this.setMessage("An error occurred when reaching the authentication server. Please update your OS or contact your IT manager.");
                 this.animateShake(apiInput);
                 break;
 
@@ -41,6 +41,9 @@ class Auth {
                 this.animateShake(apiInput);
         }
 
+        emailInput.disabled = false;
+        passwordInput.disabled = false;
+        apiInput.disabled = false;
         loginButton.disabled = false;
     }
 
@@ -55,8 +58,12 @@ class Auth {
     }
 
     animateShake(element) {
-        console.log("shake");
         element.classList.add('fail');
+        element.classList.add('shake');
+
+        setTimeout(() => {
+            element.classList.remove('shake');
+        }, 500);
 
         element.addEventListener('input', () => {
             element.classList.remove('fail');
@@ -120,6 +127,9 @@ class Auth {
 
         if (!availability) { return; }
 
+        emailInput.disabled = true;
+        passwordInput.disabled = true;
+        apiInput.disabled = true;
         loginButton.disabled = true;
 
 		const email = userData.email;
@@ -137,11 +147,9 @@ class Auth {
                 })
 
                 if (request.status !== 200) return this.failed(LoginFailedIssue.SERVER);
-
                 console.log(request);
 
                 const data = await request.text();
-
                 console.log("data :",data);
 
                 switch (data) {

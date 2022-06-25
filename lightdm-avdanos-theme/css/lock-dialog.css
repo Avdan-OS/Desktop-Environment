@@ -7,7 +7,6 @@
     pointer-events: unset;
     transition: all var(--easeOutCubic) var(--animation-speed);
 }
-
 .lock.hide {
     pointer-events: none;
 }
@@ -17,7 +16,6 @@
     flex-direction: column;
     text-shadow: 0 0 32px hsla(0, 0%, 0%, 0.4);
 }
-
 .lock .date-time #time {
     font-size: 8rem;
     font-weight: 400;
