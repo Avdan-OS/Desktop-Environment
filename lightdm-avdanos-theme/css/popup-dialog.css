@@ -1,0 +1,71 @@
+.screen.popup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding-inline: 32%;
+
+    backdrop-filter: blur(var(--blur-strength));
+
+    background: hsla(0, 0%, 0%, .5);
+}
+
+.screen.popup.hide {
+    backdrop-filter: blur(0);
+    background: transparent;
+
+    opacity: 1;
+
+    visibility: hidden;
+}
+
+.screen.popup .dialog {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+
+    padding: 40px;
+
+    background: hsla(0, 0%, 0%, .5);
+    border-radius: 16px;
+
+    text-align: center;
+
+    transform: scale(1);
+
+    transition: all var(--easeOutCubic) calc(var(--animation-speed) / 2);
+}
+.screen.popup.hide .dialog {
+    transform: scale(.8);
+    opacity: 0;
+}
+
+.screen.popup .dialog .title {
+    font-size: 2rem;
+    font-weight: bold;
+
+    line-height: 1.5;
+}
+.screen.popup .dialog * {
+    font-size: 1.1rem;
+    line-height: 1.5;
+
+    margin: 0;
+}
+.screen.popup .dialog .close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+
+    border-radius: 99px;
+
+    cursor: pointer;
+
+    padding: 12px;
+
+    transition: all var(--easeOutCubic) calc(var(--animation-speed) / 2);
+}
+.screen.popup .dialog .close:hover {
+    background: hsla(0, 0%, 100%, .1);
+}

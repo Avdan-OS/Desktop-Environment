@@ -23,7 +23,7 @@
               <input type='button' class="user-input" id='user-input-submit' value='Log In'/>
             </div>
           </div>
-          <a href="#" class="recovery-link">Forgot Password</a>
+          <a href="javascript:PopupDialog.show();" class="recovery-link">Forgot Password</a>
         </div>
       </div>
       <div class="system-status">
@@ -38,7 +38,7 @@
           <img src="img/brightness.png">
           <span id="brightness-data" class="reveal-child">50%</span>
         </div>
-        <div id="layout-button" class="system-item layout">
+        <div id="layout-button" class="system-item layout fadable">
           <span id="layout-name">EN</span>
         </div>
       </div>
@@ -81,12 +81,23 @@
         <span id="date">Tuesday, June 21</span>
       </div>
   </div>
+  <div id="popup-screen" class="screen popup hide">
+    <div class="dialog">
+      <img id="popup-close" src="./img/close.png" class="close">
+      <span class="title">Forgot Password</span>
+      <p>If you forgot your password, you need to reset your password to the new one at:</p>
+      <a href="https://enigmapr0ject.tech/api/avdan/forgotPassword.php">
+        https://enigmapr0ject.tech/api/avdan/forgotPassword.php
+      </a>
+    </div>
+  </div>
 </body>
 <script src="./js/debug.js"></script>
 <script src="./js/auth.js"></script>
 <script src="./js/transition.js"></script>
 <script src="./js/menus.js"></script>
 <script src="./js/power.js"></script>
+<script src="./js/popup-dialog.js"></script>
 <script src="./js/lock-dialog.js"></script>
 <script src="./js/login-dialog.js"></script>
 <script src="./js/key-event.js"></script>
