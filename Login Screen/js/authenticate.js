@@ -35,14 +35,14 @@ class Authenticate {
 	}
 
 	_returnRandomSuccessfulMessages() {
-		const errorMessages = [
+		const successMessages = [
 			'Authentication success! Logging in!',
 			'Logging in!',
 			'Looking good today~',
 			'You are someone\'s reason to smile.',
 			'Finally, someone with a good amount of IQ!',
 		];
-		return errorMessages[Math.floor(Math.random() * errorMessages.length)];
+		return successMessages[Math.floor(Math.random() * successMessages.length)];
 	}
 
 	// Start authentication
@@ -105,7 +105,7 @@ class Authenticate {
 					// Stop shaking
 					this._apikeyInputContainer.classList.remove('shake');
 				},
-				500
+				200
 				);
 			}
 		}
