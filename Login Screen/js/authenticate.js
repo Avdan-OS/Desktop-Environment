@@ -150,7 +150,7 @@ class Authenticate {
 			() => {
 				loginFade.showLoginFade();
 			},
-			500
+			200
 		);
 
 		// Add a delay before unlocking
@@ -189,7 +189,7 @@ class Authenticate {
 					// Stop shaking
 					this._apikeyInputContainer.classList.remove('shake');
 				},
-				500
+				200
 			);
 		} else if (isAPIIssue) {
 			this._tooltipPassword.innerText = 'Incorrect API key.';
@@ -201,7 +201,7 @@ class Authenticate {
 					// Stop shaking
 					this._apikeyInputContainer.classList.remove('shake');
 				},
-				500
+				200
 			);
 		} else {
 			this._passwordBox.classList.add('authentication-failed');
@@ -215,7 +215,7 @@ class Authenticate {
 					// Stop shaking
 					this._passwordInputContainer.classList.remove('shake');
 				},
-				500
+				200
 			);
 		}
 	}
