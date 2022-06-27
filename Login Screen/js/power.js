@@ -24,29 +24,25 @@ class Power {
 				'name': 'Shutdown',
 				'icon': 'shutdown',
 				'enabled': lightdm.can_shutdown,
-				'powerCommand': lightdm.shutdown,
-				'message': 'Shutting down...'
+				'powerCommand': lightdm.shutdown
 			},
 			{
 				'name': 'Reboot',
 				'icon': 'restart',
 				'enabled': lightdm.can_restart,
-				'powerCommand': lightdm.restart,
-				'message': 'Rebooting...'
+				'powerCommand': lightdm.restart
 			},
 			{
 				'name': 'Hibernate',
 				'icon': 'hibernate',
 				'enabled': lightdm.can_hibernate,
-				'powerCommand': lightdm.hibernate,
-				'message': 'Hibernating...'
+				'powerCommand': lightdm.hibernate
 			},
 			{
 				'name': 'Suspend',
 				'icon': 'suspend',
 				'enabled': lightdm.can_suspend,
-				'powerCommand': lightdm.suspend,
-				'message': 'Suspending...'
+				'powerCommand': lightdm.suspend
 			}
 		];
 	}
@@ -66,7 +62,7 @@ class Power {
 			'click',
 			() => {
 				this._disableWindowPropagation();
-				goodbye.showGoodbye(powerObj.icon, powerObj.message);
+				goodbye.showGoodbye(powerObj.icon);
 				this._executePowerCallback(powerObj.powerCommand);
 			}
 		);
