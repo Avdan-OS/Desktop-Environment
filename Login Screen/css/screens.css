@@ -79,13 +79,6 @@
 	display: inline-flex;
 }
 
-#goodbye-message.goodbye-content {
-	font-size: 56pt;
-	font-weight: 400;
-	font-style: italic;
-	color: var(--global-fg);
-}
-
 /* Greeter Screen */
 #screen-greeter.screen {
 	top: 0;
