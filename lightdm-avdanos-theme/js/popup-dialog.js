@@ -18,16 +18,20 @@ var PopupDialog = {
   },
   hide() {
     popupScreen.classList.add('hide');
+    this.inactiveAllDialog();
     this.inShown = false;
   },
   show() {
     popupScreen.classList.remove('hide');
     this.inShown = true;
   },
-  switchDialog(name) {
+  inactiveAllDialog() {
     Array.from(popupScreen.children).forEach((dialog) => {
       dialog.classList.remove('show');
     });
+  },
+  switchDialog(name) {
+    this.inactiveAllDialog();
 
     let selectedDialog = document.getElementById(`${name}-dialog`);
     selectedDialog.classList.add('show');
