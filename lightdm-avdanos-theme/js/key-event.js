@@ -1,7 +1,10 @@
 var KeyEvent = {
   start() {
     document.addEventListener("keydown", (event) => {
-      if ((event.key === ' ') || (event.code === 'Space') || (event.code === 'Enter') || (event.code === 'Tab')) {
+      if (
+        (event.key === ' ') || (event.code === 'Space') || (event.code === 'Enter') ||
+        (event.code === 'NumpadEnter') || (event.code === 'Tab')
+      ) {
         Transition.showLogin();
       }
 

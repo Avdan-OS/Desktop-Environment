@@ -1,6 +1,9 @@
 var powerMenu = document.getElementById("power-menu");
 var powerButton = document.getElementById("power-button");
 
+var batteryMenu = document.getElementById("battery-menu");
+var batteryButton = document.getElementById("battery-button");
+
 var brightnessMenu = document.getElementById("brightness-menu");
 var brightnessButton = document.getElementById("brightness-button");
 var brightnessSlider = document.getElementById("brightness-slider");
@@ -26,9 +29,13 @@ const Menus = {
       event.stopPropagation();
     });
     powerButton.addEventListener("click", (event) => {
+      event.stopPropagation();
+      this.toggleMenus(powerMenu);
+    });
+    batteryButton.addEventListener("click", (event) => {
       if (lightdm.can_access_battery) {
         event.stopPropagation();
-        this.toggleMenus(powerMenu);
+        this.toggleMenus(batteryMenu);
       }
     });
     brightnessButton.addEventListener('click', (event) => {
@@ -78,6 +85,7 @@ const Menus = {
   },
   closeAllMenus() {
     powerMenu.classList.remove("show");
+    batteryMenu.classList.remove("show");
     brightnessMenu.classList.remove('show');
     layoutMenu.classList.remove("show");
     sessionMenu.classList.remove("show");

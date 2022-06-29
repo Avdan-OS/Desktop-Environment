@@ -46,6 +46,24 @@
 .menus#power-menu {
     left: 0;
 }
+.menus#battery-menu {
+    left: calc((48px + 10px) * 1);
+    padding: 20px;
+}
+.menus#battery-menu .list {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.menus#battery-menu .details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.menus#battery-menu .details .level {
+    font-size: 2rem;
+    font-weight: bold;
+}
 .menus#brightness-menu {
     left: calc((48px + 10px) * 2);
     padding: 12px;

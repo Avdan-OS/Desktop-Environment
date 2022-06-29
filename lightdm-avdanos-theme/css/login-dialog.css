@@ -181,7 +181,7 @@
     padding: 8px;
 }
 .login .system-item:not(.disabled).revealable:hover > img,
-.login .system-item:not(.disabled).revealable:hover > .indicator {
+.login .system-item:not(.disabled).revealable:hover > div {
     opacity: 0;
 }
 .login .system-item:not(.disabled).revealable:hover > span {
@@ -218,28 +218,60 @@
     width: 32px;
     height: 32px;
 }
-.login .system-item.battery .indicator {
+
+.login .battery-indicator {
     display: inline-block;
 
     position: relative;
-    width: 32px;
-    height: 32px;
 }
-.login .system-item.battery .indicator * {
+.login .battery-indicator * {
     position: absolute;
     top: 0;
     bottom: 0;
 
     padding: 0 !important;
 }
-.login .system-item.battery .indicator .bar {
+.login .battery-indicator .bar {
     width: 17px;
-    height: 10px;
+    height: 8px;
 
-    top: 11px;
+    top: 12px;
     left: 6px;
 
     border-radius: 1px;
+
+    background: white;
+
+    transition: all calc(var(--animation-speed) / 2);
+}
+
+.login .system-item.battery .battery-indicator {
+    width: 32px;
+    height: 32px;
+}
+.login .system-item.battery .battery-indicator .bar {
+    width: 17px;
+    height: 8px;
+
+    top: 12px;
+    left: 6px;
+
+    border-radius: 1px;
+
+    background: white;
+}
+.login #battery-menu .battery-indicator{
+    width: 64px;
+    height: 64px;
+}
+.login #battery-menu .battery-indicator .bar {
+    width: 32px;
+    height: 16px;
+
+    top: 24px;
+    left: 12px;
+
+    border-radius: 2px;
 
     background: white;
 }

@@ -5,13 +5,15 @@ var backButton = document.getElementById("back-button");
 var loginButton = document.getElementById("user-input-submit");
 
 var batteryButton = document.getElementById("battery-button");
-var batteryData = document.getElementById("battery-data");
+var batteryData = document.getElementsByClassName("battery-data");
+var batteryState = document.getElementById("battery-state");
 
 var brightnessButton = document.getElementById("brightness-button");
 var brightnessData = document.getElementsByClassName("brightness-data");
 var brightnessSlider = document.getElementById("brightness-slider");
 
 var batteryBar = document.getElementById("battery-bar");
+var batteryBarLarge = document.getElementById("battery-bar-large");
 
 var emailInput = document.getElementById('user-input-email');
 var passwordInput = document.getElementById('user-input-password');
@@ -24,13 +26,13 @@ var LoginDialog = {
     loginButton.addEventListener("click", auth.startAuthentication.bind(auth));
 
     emailInput.addEventListener("keydown", (event) => {
-      if (event.code === 'Enter') { passwordInput.focus(); }
+      if ((event.code === 'Enter') || (event.code === 'NumpadEnter')) { passwordInput.focus(); }
     });
     passwordInput.addEventListener("keydown", (event) => {
-      if (event.code === 'Enter') { apiInput.focus(); }
+      if ((event.code === 'Enter') || (event.code === 'NumpadEnter')) { apiInput.focus(); }
     });
     apiInput.addEventListener("keydown", (event) => {
-      if (event.code === 'Enter') { auth.startAuthentication() }
+      if ((event.code === 'Enter') || (event.code === 'NumpadEnter')) { auth.startAuthentication() }
     });
 
     if (lightdm.can_access_battery) {
@@ -48,8 +50,14 @@ var LoginDialog = {
     }
   },
   updateBatteryData() {
-    batteryData.innerText = `${lightdm.batteryData.level}%`;
-    batteryBar.style.width = `${17 * (lightdm.batteryData.level / 100)}px`;
+    Array.from(batteryData).forEach((data) => {
+      data.innerText = `${lightdm.batteryData.level}%`;
+    })
+
+    batteryState.innerText = lightdm.batteryData.state;
+
+    batteryBar.style.width = `${16 * (lightdm.batteryData.level / 100)}px`;
+    batteryBarLarge.style.width = `${32 * (lightdm.batteryData.level / 100)}px`;
   },
   updateBrightnessData() {
     let value = lightdm.brightness;

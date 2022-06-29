@@ -35,11 +35,11 @@
           <img src="img/power.png">
         </div>
         <div id="battery-button" class="system-item revealable battery">
-          <div class="indicator">
-            <img src="img/battery.png">
+          <div class="battery-indicator">
+            <img src="img/battery.svg">
             <span id="battery-bar" class="bar"></span>
           </div>
-          <span id="battery-data" class="reveal-child">50%</span>
+          <span class="battery-data reveal-child">50%</span>
         </div>
         <div id="brightness-button" class="system-item revealable brightness">
           <img src="img/brightness.png">
@@ -76,6 +76,18 @@
         <div id="shutdown-menu-item" class="item">
           <img class="user-picture" src="./img/shutdown.png">
           <span>Shut Down</span>
+        </div>
+      </div>
+      <div id="battery-menu" class="menus">
+        <div class="list">
+          <div class="battery-indicator">
+            <img src="img/battery.svg" width="64" height="64">
+            <span id="battery-bar-large" class="bar"></span>
+          </div>
+          <div class="details">
+            <span class="battery-data level">50%</span>
+            <span id="battery-state">Disconnected</span>
+          </div>
         </div>
       </div>
       <div id="brightness-menu" class="menus">

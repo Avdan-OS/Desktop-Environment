@@ -142,6 +142,8 @@ var Debug = {
 				brightness_update:  {
 					connect: (callback) => { lightdm.__brightness_update_signal = callback; }
 				},
+				can_access_battery: true,
+				can_access_brightness: true,
 				authenticate: username => {
 					console.log(`Starting authenticating user: '${username}'`);
 				},
