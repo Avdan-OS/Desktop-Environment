@@ -232,14 +232,6 @@
     padding: 0 !important;
 }
 .login .battery-indicator .bar {
-    width: 17px;
-    height: 8px;
-
-    top: 12px;
-    left: 6px;
-
-    border-radius: 1px;
-
     background: white;
 
     transition: all calc(var(--animation-speed) / 2);
@@ -250,15 +242,13 @@
     height: 32px;
 }
 .login .system-item.battery .battery-indicator .bar {
-    width: 17px;
+    width: 16px;
     height: 8px;
 
     top: 12px;
     left: 6px;
 
     border-radius: 1px;
-
-    background: white;
 }
 .login #battery-menu .battery-indicator {
     width: 64px;
@@ -272,6 +262,4 @@
     left: 12px;
 
     border-radius: 2px;
-
-    background: white;
 }
