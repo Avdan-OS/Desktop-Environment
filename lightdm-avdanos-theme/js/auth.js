@@ -146,14 +146,14 @@ class Auth {
           body: `Email=${userData.email}&Password=${userData.password}&apikey=${userData.apiKey}`
         })
 
-        if (request.status !== 200) return this.failed(LoginFailedIssue.SERVER);
+        // if (request.status !== 200) return this.failed(LoginFailedIssue.API);
         console.log(request);
 
         const data = await request.text();
         console.log("data :",data);
 
         switch (data) {
-          case '405':
+          case '401':
             this.failed(LoginFailedIssue.API);
             break;
           case '403':
