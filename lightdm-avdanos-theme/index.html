@@ -25,7 +25,10 @@
               <input type='button' class="user-input" id='user-input-submit' value='Log In'/>
             </div>
           </div>
-          <a href="javascript:PopupDialog.show();" class="recovery-link">Forgot Password?</a>
+          <a
+            class="recovery-link" href="javascript:PopupDialog.switchDialog('forgot-password');PopupDialog.show();">
+            Forgot Password?
+          </a>
         </div>
       </div>
 
@@ -61,19 +64,19 @@
 
       <!-- Menus -->
       <div id="power-menu" class="menus">
-        <div id="sleep-menu-item" class="item">
+        <div id="sleep-menu-item" class="item disabled">
           <img class="user-picture" src="./img/sleep.png">
           <span>Sleep</span>
         </div>
-        <div id="hibernate-menu-item" class="item">
+        <div id="hibernate-menu-item" class="item disabled">
           <img class="user-picture" src="./img/hibernate.png">
           <span>Hibernate</span>
         </div>
-        <div id="restart-menu-item" class="item">
+        <div id="restart-menu-item" class="item disabled">
           <img class="user-picture" src="./img/restart.png">
           <span>Restart</span>
         </div>
-        <div id="shutdown-menu-item" class="item">
+        <div id="shutdown-menu-item" class="item disabled">
           <img class="user-picture" src="./img/shutdown.png">
           <span>Shut Down</span>
         </div>
@@ -123,11 +126,20 @@
   </div>
   <!-- Popup Screen -->
   <div id="popup-screen" class="screen popup hide">
-    <div class="dialog">
-      <img id="popup-close" src="./img/close.png" class="close">
-      <span class="title">Forgot Password</span>
-      <p>If you forgot your password, you need to reset your password to the new one at:</p>
-      <a>https://enigmapr0ject.tech/api/avdan/forgotPassword.php</a>
+    <div id="forgot-password-dialog" class="dialog">
+      <img src="./img/close.png" class="popup-close">
+      <span class="title">Forgot Password?</span>
+      <p class="message">If you forgot your password, you need to reset your password to the new one at:</p>
+      <a class="bottom">https://enigmapr0ject.tech/api/avdan/forgotPassword.php</a>
+    </div>
+    <div id="leave-greeter-dialog" class="dialog">
+      <img src="./img/close.png" class="popup-close">
+      <span id="leave-greeter-dialog-title" class="title">Shutdown</span>
+      <p id="leave-greeter-dialog-message" class="message">Do you really want to shutdown your computer?</p>
+      <div class="actions">
+        <span class="action" onclick="PopupDialog.hide();">Cancel</span>
+        <span id="leave-greeter-dialog-confirm-button" class="action">Shutdown</span>
+      </div>
     </div>
   </div>
   <!-- Blank/Black Screen -->

@@ -10,7 +10,12 @@ var KeyEvent = {
 
       if (event.key === 'Escape') {
         event.preventDefault();
-        Transition.hideLogin();
+
+        if (PopupDialog.inShown) {
+          PopupDialog.hide();
+        } else {
+          Transition.hideLogin();
+        }
       }
     });
   }

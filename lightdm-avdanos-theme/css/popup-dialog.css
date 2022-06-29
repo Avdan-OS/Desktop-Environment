@@ -24,9 +24,11 @@
     align-items: center;
     gap: 16px;
 
+    position: absolute;
+
     max-width: 480px;
 
-    padding: 40px;
+    padding: 16px;
 
     background: hsla(0, 0%, 0%, .5);
     border-radius: 16px;
@@ -34,8 +36,14 @@
     text-align: center;
 
     transform: scale(1);
+    opacity: 0;
+    visibility: hidden;
 
     transition: all var(--easeOutCubic) calc(var(--animation-speed) / 2);
+}
+.screen.popup .dialog.show {
+    opacity: 1;
+    visibility: visible;
 }
 .screen.popup.hide .dialog {
     transform: scale(.9);
@@ -45,15 +53,22 @@
     font-size: 2rem;
     font-weight: bold;
 
+    margin-top: 16px;
+
     line-height: 1.5;
 }
-.screen.popup .dialog * {
+.screen.popup .dialog .message {
     font-size: 1.1rem;
     line-height: 1.5;
 
-    margin: 0;
+    margin-block: 0;
+    margin-inline: 32px;
 }
-.screen.popup .dialog .close {
+.screen.popup .dialog .bottom {
+    margin-block: 0;
+    margin-bottom: 24px;
+}
+.screen.popup .dialog .popup-close {
     position: absolute;
     top: 16px;
     right: 16px;
@@ -66,6 +81,28 @@
 
     transition: all var(--easeOutCubic) calc(var(--animation-speed) / 2);
 }
-.screen.popup .dialog .close:hover {
+.screen.popup .dialog .popup-close:hover {
     background: hsla(0, 0%, 100%, .1);
+}
+.screen.popup .dialog .actions {
+    display: flex;
+    gap: 8px;
+
+    margin-top: 16px;
+
+    width: 100%;
+}
+.screen.popup .dialog .actions .action {
+    flex: 1;
+    padding: 12px 16px;
+
+    cursor: pointer;
+
+    border-radius: 4px;
+}
+.screen.popup .dialog .actions .action:hover {
+    background: hsla(0, 0%, 100%, .1);
+}
+.screen.popup .dialog .actions .action:active {
+    background: hsla(0, 0%, 0%, .1);
 }
