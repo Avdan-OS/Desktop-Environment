@@ -3,4 +3,4 @@ name=avdanos
 description=Avdan OS login screen theme
 engine=lightdm-webkit2-greeter
 url=index.html
-session=Keywords=keyword1 keyword2 ...
+session=Keywords=avdanos,login

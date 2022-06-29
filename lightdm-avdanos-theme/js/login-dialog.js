@@ -4,7 +4,10 @@ var loginScreenContent = document.getElementById("login-content");
 var backButton = document.getElementById("back-button");
 var loginButton = document.getElementById("user-input-submit");
 
+var batteryButton = document.getElementById("battery-button");
 var batteryData = document.getElementById("battery-data");
+
+var brightnessButton = document.getElementById("brightness-button");
 var brightnessData = document.getElementsByClassName("brightness-data");
 var brightnessSlider = document.getElementById("brightness-slider");
 
@@ -30,11 +33,19 @@ var LoginDialog = {
       if (event.code === 'Enter') { auth.startAuthentication() }
     });
 
-    this.updateBatteryData();
-    this.updateBrightnessData();
+    if (lightdm.can_access_battery) {
+      this.updateBatteryData();
+      lightdm.battery_update.connect(this.updateBatteryData);
+    } else {
+      batteryButton.classList.add('disabled');
+    }
 
-    lightdm.battery_update = this.updateBatteryData;
-    lightdm.brightness_update = this.updateBrightnessData;
+    if (lightdm.can_access_brightness) {
+      this.updateBrightnessData();
+      lightdm.brightness_update.connect(this.updateBrightnessData);
+    } else {
+      brightnessButton.classList.add('disabled');
+    }
   },
   updateBatteryData() {
     batteryData.innerText = `${lightdm.batteryData.level}%`;

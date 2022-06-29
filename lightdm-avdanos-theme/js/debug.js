@@ -136,8 +136,12 @@ var Debug = {
 					}
 				],
 				language: 'American English',
-				battery_update: () => {},
-				brightness_update: () => {},
+				battery_update: {
+					connect: (callback) => { lightdm.__battery_update_signal = callback; }
+				},
+				brightness_update:  {
+					connect: (callback) => { lightdm.__brightness_update_signal = callback; }
+				},
 				authenticate: username => {
 					console.log(`Starting authenticating user: '${username}'`);
 				},
@@ -174,30 +178,30 @@ var Debug = {
 					alert('System is suspending...');
 				}
 			};
+
+			window.lightdm = new Proxy(window.lightdm, {
+				set: function (target, key, value) {
+					target[key] = value;
+
+					if (key == 'brightness') {
+						window.lightdm.__brightness_update_signal();
+					}
+
+					return true;
+				}
+			});
+			window.lightdm.batteryData = new Proxy(window.lightdm.batteryData, {
+				set: function (target, key, value) {
+					target[key] = value;
+
+					if (key == 'level') {
+						window.lightdm.__battery_update_signal();
+					}
+
+					return true;
+				}
+			});
 		}
-
-		window.lightdm = new Proxy(window.lightdm, {
-			set: function (target, key, value) {
-				target[key] = value;
-
-				if (key == 'brightness') {
-								target.brightness_update();
-				}
-
-				return true;
-			}
-		});
-		window.lightdm.batteryData = new Proxy(window.lightdm.batteryData, {
-			set: function (target, key, value) {
-				target[key] = value;
-
-				if (key == 'level') {
-								window.lightdm.battery_update();
-				}
-
-				return true;
-			}
-		});
 	}
 }
 

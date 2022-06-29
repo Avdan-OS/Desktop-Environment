@@ -57,6 +57,8 @@
 }
 .menus#layout-menu {
     left: calc((48px + 10px) * 3);
+    max-height: 480px;
+    overflow-y: overlay;
 }
 .menus#layout-menu .item {
     padding: 8px;

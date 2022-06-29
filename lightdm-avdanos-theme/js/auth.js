@@ -140,10 +140,10 @@ class Auth {
 
 		try {
 			if (email.length > 0 && pass.length > 0 && key.length > 0) {
-  console.log("Sending request");
-  const request = await fetch('https://enigmapr0ject.tech/api/avdan/login.php', {
+        console.log("Sending request");
+        const request = await fetch('https://enigmapr0ject.tech/api/avdan/login.php', {
           method: 'POST',
-          body: `Email=${userData.email}&Password=${userData.password}&apikey=${userData.apiKey}`,
+          body: `Email=${userData.email}&Password=${userData.password}&apikey=${userData.apiKey}`
         })
 
         if (request.status !== 200) return this.failed(LoginFailedIssue.SERVER);
@@ -170,6 +170,7 @@ class Auth {
       }
 		} catch (e) {
       console.log(e);
+      this.failed();
 		}
 	}
 }

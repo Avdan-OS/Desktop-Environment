@@ -26,12 +26,16 @@ const Menus = {
       event.stopPropagation();
     });
     powerButton.addEventListener("click", (event) => {
-      event.stopPropagation();
-      this.toggleMenus(powerMenu);
+      if (lightdm.can_access_battery) {
+        event.stopPropagation();
+        this.toggleMenus(powerMenu);
+      }
     });
     brightnessButton.addEventListener('click', (event) => {
-      event.stopPropagation();
-      this.toggleMenus(brightnessMenu);
+      if (lightdm.can_access_brightness) {
+        event.stopPropagation();
+        this.toggleMenus(brightnessMenu);
+      }
     });
     layoutButton.addEventListener("click", (event) => {
       event.stopPropagation();
@@ -64,9 +68,11 @@ const Menus = {
 
     this._loadSessions();
     this._setSession(
-      lightdm.sessions.find((session) => {
-        return session.key == lightdm.default_session;
-      }),
+      (lightdm.default_session != "") ?
+        lightdm.sessions.find((session) => {
+          return session.key == lightdm.default_session;
+        })
+      : lightdm.sessions[0],
       false
     );
   },
