@@ -17,6 +17,13 @@ var KeyEvent = {
           Transition.hideLogin();
         }
       }
+
+      if (Power.inBlank) {
+        Transition.fadeIn();
+        Transition.hideLogin();
+
+        Power.inBlank = false;
+      }
     });
   }
 }

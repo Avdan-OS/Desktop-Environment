@@ -15,11 +15,13 @@ const POWER_ACTION = {
 }
 
 var Power = {
+  inBlank: false,
   start() {
     if (lightdm.can_suspend) {
       sleepMenuItem.classList.remove('disabled');
       sleepMenuItem.addEventListener('click', () => {
         this.startAction(POWER_ACTION.SUSPEND);
+        this.inBlank = true;
       });
     }
 
@@ -27,6 +29,7 @@ var Power = {
       hibernateMenuItem.classList.remove('disabled');
       hibernateMenuItem.addEventListener('click', () => {
         this.showDialog(POWER_ACTION.HIBERNATE);
+        this.inBlank = true;
       });
     }
     if (lightdm.can_restart) {
@@ -88,6 +91,7 @@ var Power = {
           break;
 
         case POWER_ACTION.HIBERNATE:
+          PopupDialog.hide();
           lightdm.hibernate();
           break;
 
