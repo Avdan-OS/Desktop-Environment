@@ -68,14 +68,18 @@ const Menus = {
     this._loadLayouts();
     this._setLayout(
       lightdm.layouts.find((layout) => {
-        return layout.name == lightdm.layout.name;
+        if (typeof lightdm.layout == "object") {
+          return layout.name == lightdm.layout.name;
+        } else {
+          return layout.name == lightdm.layout;
+        }
       }),
       false
     );
 
     this._loadSessions();
     this._setSession(
-      (lightdm.default_session != "") ?
+      (lightdm.default_session && lightdm.default_session != 'default') ?
         lightdm.sessions.find((session) => {
           return session.key == lightdm.default_session;
         })

@@ -12,7 +12,28 @@ const LoginFailedIssue = {
 }
 
 class Auth {
-  constructor () {}
+  constructor () {
+    window.autologin_timer_expired = this.startAuth;
+
+    lightdm.authentication_complete.connect(() => {
+			if (lightdm.is_authenticated) {
+        this.success();
+			} else {
+        this.failed(LoginFailedIssue.AUTH);
+			}
+		});
+
+    if (!lightdm) {
+      lightdm.onload = this.startAuth;
+		} else {
+			this.startAuth();
+		}
+  }
+
+  startAuth() {
+    console.log("Start authentication");
+    lightdm.authenticate(String(lightdm.users[0].username));
+  }
 
   failed(failedIssue) {
     passwordInput.value = '';
@@ -90,17 +111,6 @@ class Auth {
     return true;
   }
 
-  complete() {
-    console.log("isAuthenticated?: " + lightdm.is_authenticated);
-		window.authentication_complete = () => {
-			if (lightdm.is_authenticated) {
-  this.success();
-			} else {
-  this.failed(LoginFailedIssue.AUTH);
-			}
-		};
-  }
-
   success() {
 		// Make password input read-only
 		passwordInput.readOnly = true;
@@ -112,7 +122,10 @@ class Auth {
 
 		// Add a delay before unlocking
 		setTimeout(() => {
-      lightdm.start_session_sync("plasma");
+      lightdm.start_session(
+        (lightdm.default_session && lightdm.default_session != 'default')
+        ?   lightdm.default_session : lightdm.sessions[0].key
+      );
     }, 1000);
   }
 
@@ -141,12 +154,12 @@ class Auth {
 		try {
 			if (email.length > 0 && pass.length > 0 && key.length > 0) {
         console.log("Sending request");
-        const request = await fetch('https://enigmapr0ject.tech/api/avdan/login.php', {
+        console.log(`Email=${userData.email}&Password=${userData.password}&apikey=${userData.apiKey}`);
+        const request = await fetch('https://enigmapr0ject.tech/api/avdan/login.php/', {
           method: 'POST',
           body: `Email=${userData.email}&Password=${userData.password}&apikey=${userData.apiKey}`
         })
 
-        // if (request.status !== 200) return this.failed(LoginFailedIssue.API);
         console.log(request);
 
         const data = await request.text();
@@ -160,11 +173,10 @@ class Auth {
             this.failed(LoginFailedIssue.AUTH);
             break;
           case '200':
-            this.complete();
-            lightdm.respond("avdan");
+            lightdm.respond("0812");
             break;
           default:
-            this.failed();
+            this.failed(LoginFailedIssue.SERVER);
             break;
         }
       }
