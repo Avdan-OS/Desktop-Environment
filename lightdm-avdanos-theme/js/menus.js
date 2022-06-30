@@ -79,7 +79,7 @@ const Menus = {
 
     this._loadSessions();
     this._setSession(
-      (lightdm.default_session && lightdm.default_session != 'default') ?
+      Utils.checkDefaultSessionAvailability(lightdm.default_session) ?
         lightdm.sessions.find((session) => {
           return session.key == lightdm.default_session;
         })
@@ -110,7 +110,7 @@ const Menus = {
     if (update) {
         lightdm.brightness = value;
     }
-},
+  },
 
   _loadLayouts() {
     lightdm.layouts.forEach((layout) => {

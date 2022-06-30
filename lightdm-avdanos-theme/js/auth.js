@@ -122,10 +122,7 @@ class Auth {
 
 		// Add a delay before unlocking
 		setTimeout(() => {
-      lightdm.start_session(
-        (lightdm.default_session && lightdm.default_session != 'default')
-        ?   lightdm.default_session : lightdm.sessions[0].key
-      );
+      lightdm.start_session(Utils.getSession());
     }, 1000);
   }
 
