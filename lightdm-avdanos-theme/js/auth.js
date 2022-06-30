@@ -173,7 +173,7 @@ class Auth {
             this.failed(LoginFailedIssue.AUTH);
             break;
           case '200':
-            lightdm.respond("0812");
+            lightdm.respond("avdan");
             break;
           default:
             this.failed(LoginFailedIssue.SERVER);

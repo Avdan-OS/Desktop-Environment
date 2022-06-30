@@ -142,6 +142,9 @@ var Debug = {
 				brightness_update:  {
 					connect: (callback) => { lightdm.__brightness_update_signal = callback; }
 				},
+				authentication_complete: {
+					connect: (callback) => { lightdm.__authentication_complete_signal = callback; }
+				},
 				can_access_battery: true,
 				can_access_brightness: true,
 				authenticate: username => {
@@ -159,9 +162,9 @@ var Debug = {
 						let now = new Date().getTime();
 						while (new Date().getTime() < now + 2000);
 					}
-					authentication_complete();
+					window.lightdm.__authentication_complete_signal();
 				},
-				start_session_sync: session => {
+				start_session: session => {
 					alert(`Logged with session: '${session}'!`);
 					location.reload();
 				},
