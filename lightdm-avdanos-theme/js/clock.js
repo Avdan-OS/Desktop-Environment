@@ -11,11 +11,14 @@ const TIME_FORMAT = {
   "24": 1
 }
 
+var _clockInterval = null;
+var _timeFormat = localStorage.getItem('time-format') || TIME_FORMAT['12'];
+
 function _padZero(data) {
   return String(data).padStart(2, "0");
 }
 
-function getTime(is12) {
+function _getTime(is12) {
   const date = new Date();
 
   let hourReminder = date.getHours() % 12;
@@ -37,7 +40,7 @@ function getTime(is12) {
   }
 }
 
-function getDate() {
+function _getDate() {
   const date = new Date();
 
   const DAY = [
@@ -72,40 +75,23 @@ function getDate() {
   }
 }
 
-var clockInterval = null;
-var timeFormat = TIME_FORMAT['12'];
-
 var Clock = {
   start() {
     this.startClock();
+
     time12hButton.addEventListener('click', () => {
       this.setFormat(TIME_FORMAT['12']);
     });
     time24hButton.addEventListener('click', () => {
       this.setFormat(TIME_FORMAT['24']);
     });
+
+    this.checkFormat(_timeFormat);
   },
-  setFormat(format) {
-    this.stopClock();
 
-    timeFormat = format;
-    switch (format) {
-      case TIME_FORMAT['12']:
-        time12hButton.classList.add('active');
-        time24hButton.classList.remove('active');
-        break;
-
-      case TIME_FORMAT['24']:
-        time12hButton.classList.remove('active');
-        time24hButton.classList.add('active');
-        break;
-    }
-
-    this.startClock();
-  },
   setClock() {
     // Time
-    let timeVal = getTime(timeFormat == TIME_FORMAT['12']);
+    let timeVal = _getTime(_timeFormat == TIME_FORMAT['12']);
     let midday = (timeVal.midDay) ? timeVal.midDay : '';
     time.innerText = `${timeVal.hour}:${timeVal.minute}`;
     Array.from(clocks).forEach((clock) => {
@@ -114,17 +100,35 @@ var Clock = {
     timeMidday.innerText = midday;
 
     // Date
-    let dateVal = getDate();
+    let dateVal = _getDate();
     Array.from(dates).forEach((date) => {
       date.innerText = `${dateVal.day}, ${dateVal.month} ${dateVal.date}`
     })
   },
   startClock() {
     this.setClock();
-		clockInterval = setInterval(this.setClock, 1000);
+		this._clockInterval = setInterval(this.setClock, 1000);
   },
   stopClock() {
-    clearInterval(clockInterval);
+    clearInterval(this._clockInterval);
+  },
+  setFormat(format) {
+    this.stopClock();
+
+    _timeFormat = format;
+    localStorage.setItem('time-format', format);
+
+    this.checkFormat(format);
+    this.startClock();
+  },
+  checkFormat(format) {
+    if (format == TIME_FORMAT['12']) {
+      time12hButton.classList.add('active');
+      time24hButton.classList.remove('active');
+    } else {
+      time12hButton.classList.remove('active');
+      time24hButton.classList.add('active');
+    }
   }
 }
 
