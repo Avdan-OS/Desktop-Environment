@@ -26,7 +26,7 @@ var Power = {
     if (lightdm.can_hibernate) {
       hibernateMenuItem.classList.remove('disabled');
       hibernateMenuItem.addEventListener('click', () => {
-        this.startAction(POWER_ACTION.HIBERNATE);
+        this.showDialog(POWER_ACTION.HIBERNATE);
       });
     }
     if (lightdm.can_restart) {
@@ -47,6 +47,16 @@ var Power = {
     PopupDialog.show();
 
     switch (type) {
+      case POWER_ACTION.HIBERNATE:
+          leaveGreeterDialogTitle.innerText = 'Hibernate';
+          leaveGreeterDialogMessage.innerText = 'Do you really want to restart your hibernate? Hibernate will be save your activity to the disk';
+          leaveGreeterDialogConfirmButton.innerText = 'Hibernate';
+          leaveGreeterDialogConfirmButton.onclick = (event) => {
+            event.stopPropagation();
+            this.startAction(type);
+          }
+          break;
+
       case POWER_ACTION.RESTART:
           leaveGreeterDialogTitle.innerText = 'Restart';
           leaveGreeterDialogMessage.innerText = 'Do you really want to restart your computer?';
@@ -57,15 +67,15 @@ var Power = {
           }
           break;
 
-        case POWER_ACTION.SHUTDOWN:
-          leaveGreeterDialogTitle.innerText = 'Shutdown';
-          leaveGreeterDialogMessage.innerText = 'Do you really want to shutdown your computer?';
-          leaveGreeterDialogConfirmButton.innerText = 'Shutdown';
-          leaveGreeterDialogConfirmButton.onclick = (event) => {
-            event.stopPropagation();
-            this.startAction(type);
-          }
-          break;
+      case POWER_ACTION.SHUTDOWN:
+        leaveGreeterDialogTitle.innerText = 'Shutdown';
+        leaveGreeterDialogMessage.innerText = 'Do you really want to shutdown your computer?';
+        leaveGreeterDialogConfirmButton.innerText = 'Shutdown';
+        leaveGreeterDialogConfirmButton.onclick = (event) => {
+          event.stopPropagation();
+          this.startAction(type);
+        }
+        break;
     }
   },
   startAction(action) {
