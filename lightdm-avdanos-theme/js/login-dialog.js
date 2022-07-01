@@ -1,8 +1,12 @@
 var lockScreen = document.getElementById("lock-screen");
 var loginScreenContent = document.getElementById("login-content");
 
+var backgroundScreen = document.getElementById("background-screen");
+
 var backButton = document.getElementById("back-button");
 var loginButton = document.getElementById("user-input-submit");
+
+var userPicture = document.getElementById("user-picture");
 
 var batteryButton = document.getElementById("battery-button");
 var batteryData = document.getElementsByClassName("battery-data");
@@ -24,6 +28,9 @@ var LoginDialog = {
     lockScreen.addEventListener("click", Transition.showLogin);
     backButton.addEventListener("click", Transition.hideLogin);
     loginButton.addEventListener("click", auth.startAuthentication.bind(auth));
+
+    if (lightdm.users[0].image) { userPicture.src = lightdm.users[0].image; }
+    if (lightdm.users[0].background) { Backgrounds.setBackground(lightdm.users[0].background); }
 
     emailInput.addEventListener("keydown", (event) => {
       if ((event.code === 'Enter') || (event.code === 'NumpadEnter')) { passwordInput.focus(); }

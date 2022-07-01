@@ -12,6 +12,10 @@ var layoutMenu = document.getElementById("layout-menu");
 var layoutButton = document.getElementById("layout-button");
 var layoutName = document.getElementById("layout-name");
 
+var backgroundMenu = document.getElementById("background-menu");
+var backgroundButton = document.getElementById("background-button");
+var backgroundList = document.getElementById("background-list");
+
 var sessionMenu = document.getElementById("session-menu");
 var sessionButton = document.getElementById("session-button");
 var sessionName = document.getElementById("session-name");
@@ -48,6 +52,11 @@ const Menus = {
       event.stopPropagation();
       this.toggleMenus(layoutMenu);
     });
+
+    backgroundButton.addEventListener("click", (event) => {
+      event.stopPropagation();
+      this.toggleMenus(backgroundMenu);
+    });
     sessionButton.addEventListener("click", (event) => {
       event.stopPropagation();
       this.toggleMenus(sessionMenu);
@@ -77,6 +86,8 @@ const Menus = {
       false
     );
 
+    this._loadBackgrounds();
+
     this._loadSessions();
     this._setSession(
       Utils.checkDefaultSessionAvailability(lightdm.default_session) ?
@@ -92,6 +103,8 @@ const Menus = {
     batteryMenu.classList.remove("show");
     brightnessMenu.classList.remove('show');
     layoutMenu.classList.remove("show");
+
+    backgroundMenu.classList.remove("show");
     sessionMenu.classList.remove("show");
     clockMenu.classList.remove("show");
   },
@@ -132,6 +145,24 @@ const Menus = {
     if (update) {
       lightdm.layout = layout;
     }
+  },
+
+  _loadBackgrounds() {
+    let backgroundPaths = [];
+    Backgrounds.getBackgrounds(greeter_config.branding.background_images_dir, backgroundPaths);
+
+    // Load backgrounds when greeter is completely loaded
+    window.addEventListener("load", () => {
+      Object.values(backgroundPaths).forEach((path) => {
+        let item = document.createElement("img");
+        item.classList.add('item');
+        item.src = path;
+
+        item.addEventListener("click", () => Backgrounds.setBackground(path))
+
+        backgroundList.appendChild(item);
+      })
+    });
   },
 
   _loadSessions() {

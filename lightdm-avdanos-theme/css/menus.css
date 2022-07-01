@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: column;
 
+    max-height: 480px;
+
     z-index: 5;
 
     background: hsla(0, 0%, 0%, 0.4);
@@ -79,11 +81,43 @@
 }
 .menus#layout-menu {
     left: calc((48px + 10px) * 3);
-    max-height: 480px;
     overflow-y: overlay;
 }
 .menus#layout-menu .item {
     padding: 8px;
+}
+.menus#background-menu {
+    right: 0;
+
+    gap: 16px;
+    padding: 16px;
+}
+.menus#background-menu span {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+.menus#background-menu .list {
+    display: grid;
+    grid-template-columns: auto auto;
+
+    gap: 12px;
+    justify-content: space-between;
+
+    overflow-y: auto;
+}
+.menus#background-menu .list .item {
+    width: 128px;
+    height: 72px;
+    border-radius: 4px;
+
+    padding: 0;
+
+    background: hsla(0, 0%, 0%, 0.1);
+
+    background-position: center !important;
+    background-size: cover !important;
+
+    transition: all var(--easeOutCubic) calc(var(--animation-speed) / 2);
 }
 .menus#session-menu {
     width: 240px;

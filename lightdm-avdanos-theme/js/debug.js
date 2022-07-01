@@ -4,13 +4,6 @@ var Debug = {
 		this._loadDebugObjects();
 	},
 	_loadDebugObjects() {
-		// if (!window.config) {
-		// 	window.config = {};
-		// 	window.config.get_str = function() {
-		// 		return '/usr/share/lightdm-webkit/themes/lightdm-webkit2-theme-glorious/assets/';
-		// 	};
-		// }
-
 		if (!window.greeter_config) {
 			window.greeter_config = {};
 			window.greeter_config.branding = {

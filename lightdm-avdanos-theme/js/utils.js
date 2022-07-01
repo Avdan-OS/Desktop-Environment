@@ -10,5 +10,12 @@ var Utils = {
   },
   checkDefaultSessionAvailability(session) {
     return (session && session != 'default');
+  },
+
+  isPromise(value) {
+    return (typeof value === 'object' && typeof value.then === 'function');
+  },
+  isImageFile(path) {
+    return path.match(/\.(gif|jpe?g|tiff?|png|webp|bmp|svg)$/i) !== null;
   }
 }

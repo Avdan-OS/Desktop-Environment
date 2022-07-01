@@ -14,7 +14,7 @@
       <!-- Login Dialog -->
       <div class="dialog">
         <div class="user">
-          <img class="user-picture" src="./user-picture.png">
+          <img id="user-picture" class="user-picture" src="./user-picture.png">
           <div class="inputs">
             <input type='email' class="user-input" id='user-input-email' autocomplete='off' placeholder='Email'/>
             <input type='password' class="user-input" id='user-input-password' autocomplete='off' placeholder='Password'/>
@@ -55,6 +55,9 @@
 
       <!-- System Info -->
       <div class="system-info fadable">
+        <div id="background-button" class="system-item circular">
+          <img src="img/background.png">
+        </div>
         <div id="session-button" class="system-item session">
           <img id="session-icon" class="icon">
           <span id="session-name" class="name">Plasma</span>
@@ -100,6 +103,11 @@
         </div>
       </div>
       <div id="layout-menu" class="menus"></div>
+
+      <div id="background-menu" class="menus">
+        <span>Backgrounds:</span>
+        <div id="background-list" class="list"></div>
+      </div>
       <div id="session-menu" class="menus"></div>
       <div id="clock-menu" class="menus">
         <span class="clock">12:34</span>
@@ -149,6 +157,7 @@
 <script src="./js/debug.js"></script>
 <script src="./js/utils.js"></script>
 <script src="./js/auth.js"></script>
+<script src="./js/backgrounds.js"></script>
 <script src="./js/transition.js"></script>
 <script src="./js/menus.js"></script>
 <script src="./js/power.js"></script>
