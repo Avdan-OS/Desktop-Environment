@@ -69,6 +69,42 @@
     line-height: 0;
     cursor: pointer;
 }
+.login .content .dialog .user .user-input.warper {
+    /* display: flex; */
+    padding: 0;
+
+    /* height: fit-content; */
+
+    position: relative;
+
+    background: transparent;
+
+    /* align-items: center; */
+}
+.login .content .dialog .user .user-input.warper .toggle-button {
+    position: absolute;
+    right: 0;
+    top: 50%;
+
+    padding: 8px;
+    margin: 0 4px;
+
+    cursor: pointer;
+
+    transform: translateY(-50%);
+
+    display: flex;
+}
+.login .content .dialog .user .user-input.warper .toggle-button * {
+    width: 24px;
+    height: 24px;
+}
+.login .content .dialog .user .user-input.warper .toggle-button:not(.active) .onHide {
+    display: none;
+}
+.login .content .dialog .user .user-input.warper .toggle-button.active .onShow {
+    display: none;
+}
 .login .content .dialog .user #user-message {
     line-height: 0;
     text-align: center;
@@ -90,27 +126,27 @@
     width: 60%;
     cursor: pointer;
 }
-.login .content .dialog .user .user-input:hover,
+.login .content .dialog .user .user-input:not(.warper):hover,
 .login .content .dialog .user .button:hover {
     background: hsla(0, 0%, 0%, 0.4);
     box-shadow: transparent;
 }
-.login .content .dialog .user .user-input:disabled,
+.login .content .dialog .user .user-input:not(.warper):disabled,
 .login .content .dialog .user .button:disabled {
     opacity: .5;
 }
-.login .content .dialog .user .user-input[type=button]:active,
+.login .content .dialog .user .user-input[type=button]:not(.warper):active,
 .login .content .dialog .user .button:active {
     transition-duration: 0s;
     box-shadow: inset 0 0 0 999px hsla(0, 0%, 100%, 0.2);
 }
-.login .content .dialog .user .user-input:focus {
+.login .content .dialog .user .user-input:not(.warper):focus {
     background: hsla(0, 0%, 0%, 0.3);
 }
-.login .content .dialog .user .user-input.fail {
+.login .content .dialog .user .user-input:not(.warper).fail {
     box-shadow: inset 0 0 0 999px hsla(0, 100%, 50%, 0.1);
 }
-.login .content .dialog .user .user-input.shake {
+.login .content .dialog .user .user-input:not(.warper).shake {
     animation: shake var(--animation-speed);
 }
 .login .content .dialog .user.inactive {

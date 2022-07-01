@@ -17,8 +17,20 @@
           <img id="user-picture" class="user-picture" src="./user-picture.png">
           <div class="inputs">
             <input type='email' class="user-input" id='user-input-email' autocomplete='off' placeholder='Email'/>
-            <input type='password' class="user-input" id='user-input-password' autocomplete='off' placeholder='Password'/>
-            <input type='password' class="user-input" id='user-input-api' autocomplete='off' placeholder='API Key'/>
+            <div class="user-input warper">
+              <input type='password' class="user-input" id='user-input-password' autocomplete='off' placeholder='Password'/>
+              <span class="toggle-button" onclick="">
+                <img src="./img/show.png" class="onShow">
+                <img src="./img/hide.png" class="onHide">
+              </span>
+            </div>
+            <div class="user-input warper">
+              <input type='password' class="user-input" id='user-input-api' autocomplete='off' placeholder='API Key'/>
+              <span class="toggle-button" onclick="">
+                <img src="./img/show.png" class="onShow">
+                <img src="./img/hide.png" class="onHide">
+              </span>
+            </div>
             <span id="user-message"></span>
             <div class="login-controls">
               <div id="back-button" class="button"><img src="img/back.png"></div>

@@ -23,6 +23,8 @@ var emailInput = document.getElementById('user-input-email');
 var passwordInput = document.getElementById('user-input-password');
 var apiInput = document.getElementById('user-input-api');
 
+var toggleButtons = document.getElementsByClassName('toggle-button');
+
 var LoginDialog = {
   start() {
     lockScreen.addEventListener("click", Transition.showLogin);
@@ -41,6 +43,14 @@ var LoginDialog = {
     apiInput.addEventListener("keydown", (event) => {
       if ((event.code === 'Enter') || (event.code === 'NumpadEnter')) { auth.startAuthentication() }
     });
+
+    Array.from(toggleButtons).forEach((button) => {
+      button.addEventListener("click", () => {
+        button.classList.toggle('active');
+        button.parentElement.children[0].type =
+          button.classList.contains('active') ? 'text' : 'password';
+      })
+    })
 
     if (lightdm.can_access_battery) {
       this.updateBatteryData();
