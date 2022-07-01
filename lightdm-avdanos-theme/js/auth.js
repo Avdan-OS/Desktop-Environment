@@ -13,21 +13,35 @@ const LoginFailedIssue = {
 
 class Auth {
   constructor () {
-    window.autologin_timer_expired = this.startAuth;
+    if (typeof lightdm.autologin_timer_expired == 'object') {
+      lightdm.autologin_timer_expired.connect(this.startAuth);
+    } else {
+      lightdm.autologin_timer_expired = this.startAuth;
+    }
 
-    lightdm.authentication_complete.connect(() => {
-			if (lightdm.is_authenticated) {
-        this.success();
-			} else {
-        this.failed(LoginFailedIssue.AUTH);
-			}
-		});
+    if (typeof lightdm.authentication_complete == 'object') {
+      lightdm.authentication_complete.connect(() => {
+        if (lightdm.is_authenticated) {
+          this.success();
+        } else {
+          this.failed(LoginFailedIssue.AUTH);
+        }
+      });
+    } else {
+      lightdm.authentication_complete = () => {
+        if (lightdm.is_authenticated) {
+          this.success();
+        } else {
+          this.failed(LoginFailedIssue.AUTH);
+        }
+      };
+    }
 
     if (!lightdm) {
       lightdm.onload = this.startAuth;
-		} else {
-			this.startAuth();
-		}
+    } else {
+      this.startAuth();
+    }
   }
 
   startAuth() {
@@ -38,7 +52,7 @@ class Auth {
   failed(failedIssue) {
     passwordInput.value = '';
 
-		// Error messages/UI
+    // Error messages/UI
     switch (failedIssue) {
       case LoginFailedIssue.SERVER:
         this.setMessage("An error occurred when reaching the authentication server. Please update your OS or contact your IT manager.");
@@ -112,26 +126,30 @@ class Auth {
   }
 
   success() {
-		// Make password input read-only
-		passwordInput.readOnly = true;
-		passwordInput.blur();
+    // Make password input read-only
+    passwordInput.readOnly = true;
+    passwordInput.blur();
 
-		setTimeout(() => {
+    setTimeout(() => {
       Transition.fadeOut();
     }, 500);
 
-		// Add a delay before unlocking
-		setTimeout(() => {
-      lightdm.start_session(Utils.getSession());
+    // Add a delay before unlocking
+    setTimeout(() => {
+      if (lightdm.start_session) {
+        lightdm.start_session(Utils.getAvailableSession());
+      } else {
+        lightdm.start_session_sync(Utils.getAvailableSession());
+      }
     }, 1000);
   }
 
   async startAuthentication() {
     const userData = {
-			email: emailInput.value,
-			password: passwordInput.value,
-			apiKey: apiInput.value
-		}
+      email: emailInput.value,
+      password: passwordInput.value,
+      apiKey: apiInput.value
+    }
 
     let availability = this.checkInputAvailability(userData);
 
@@ -142,14 +160,14 @@ class Auth {
     apiInput.disabled = true;
     loginButton.disabled = true;
 
-		const email = userData.email;
-		const pass = userData.password;
-		const key = userData.apiKey;
+    const email = userData.email;
+    const pass = userData.password;
+    const key = userData.apiKey;
 
     this.setMessage();
 
-		try {
-			if (email.length > 0 && pass.length > 0 && key.length > 0) {
+    try {
+      if (email.length > 0 && pass.length > 0 && key.length > 0) {
         console.log("Sending request");
         console.log(`Email=${userData.email}&Password=${userData.password}&apikey=${userData.apiKey}`);
         const request = await fetch('https://enigmapr0ject.tech/api/avdan/login.php/', {
@@ -170,18 +188,21 @@ class Auth {
             this.failed(LoginFailedIssue.AUTH);
             break;
           case '200':
-            lightdm.respond("avdan");
+            lightdm.respond("0812");
+            if (typeof lightdm.authentication_complete != 'object') {
+              lightdm.authentication_complete();
+            }
             break;
           default:
             this.failed(LoginFailedIssue.SERVER);
             break;
         }
       }
-		} catch (e) {
+    } catch (e) {
       console.log(e);
       this.failed();
-		}
-	}
+    }
+  }
 }
 
 var auth = new Auth();

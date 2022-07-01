@@ -4,17 +4,43 @@ var Debug = {
 		this._loadDebugObjects();
 	},
 	_loadDebugObjects() {
-		if (!window.config) {
-			window.config = {};
-			window.config.get_str = function() {
-				return '/usr/share/lightdm-webkit/themes/lightdm-webkit2-theme-glorious/assets/';
+		// if (!window.config) {
+		// 	window.config = {};
+		// 	window.config.get_str = function() {
+		// 		return '/usr/share/lightdm-webkit/themes/lightdm-webkit2-theme-glorious/assets/';
+		// 	};
+		// }
+
+		if (!window.greeter_config) {
+			window.greeter_config = {};
+			window.greeter_config.branding = {
+				background_images_dir: "/usr/share/backgrounds",
+				logo: "/usr/share/web-greeter/themes/default/img/antergos-logo-user.png",
+				user_image: "/usr/share/web-greeter/themes/default/img/antergos.png",
 			};
 		}
 
-		if (!window.greeterutil) {
-			window.greeterutil = {};
-			window.greeterutil.dirlist = function(path) {
-				return false;
+		if (!window.theme_utils) {
+			window.theme_utils = {};
+			window.theme_utils.dirlist = function(path, images_only, callback) {
+				if ("" === path || "string" !== typeof path) {
+					console.error(`theme_utils.dirlist(): path must be a non-empty string!`);
+					return callback([]);
+				}
+				if (null !== path.match(/\/\.+(?=\/)/)) {
+					// No special directory names allowed (eg ../../)
+					path = path.replace(/\/\.+(?=\/)/g, "");
+				}
+
+				if (!callback) { callback = () => {}; }
+
+				try {
+					// Should be changed here
+					return callback([]);
+				} catch (err) {
+					console.error(`theme_utils.dirlist(): ${err}`);
+					return callback([]);
+				}
 			};
 		}
 
@@ -77,34 +103,14 @@ var Debug = {
 				],
 				users: [
 					{
-						display_name: 'Yasuho Hirose',
-						username: 'bestgirl',
-						image: 'assets/profiles/yasuhoh.jpg'
+						display_name: 'Advendra Deswanta',
+						username: 'adeswanta08',
+						image: 'user-picture.png'
 					},
 					{
-						display_name: 'Josuke Higashikata',
-						username: '4balls',
-						image: 'assets/profiles/josukeh.jpg'
-					},
-					{
-						display_name: 'Johnny Joestar',
-						username: 'tellhimyourself',
-						image: 'assets/profiles/johnnyj.jpg'
-					},
-					{
-						display_name: 'Gyro Zepelli',
-						username: 'pizzamozarella',
-						image: 'assets/profiles/gyroz.jpg'
-					},
-					{
-						display_name: 'Diego Brando',
-						username: 'diosaur',
-						image: 'assets/profiles/diegob.jpg'
-					},
-					{
-						display_name: 'Funny Valentine',
-						username: 'napkinwiper',
-						image: 'assets/profiles/funnyv.jpg'
+						display_name: 'Jeffery Holley',
+						username: 'jeffrey12',
+						image: 'user-picture.png'
 					}
 				],
 				languages: [
@@ -141,6 +147,9 @@ var Debug = {
 				},
 				brightness_update:  {
 					connect: (callback) => { lightdm.__brightness_update_signal = callback; }
+				},
+				autologin_timer_expired: {
+					connect: (callback) => { lightdm.__autologin_timer_expired_signal = callback; }
 				},
 				authentication_complete: {
 					connect: (callback) => { lightdm.__authentication_complete_signal = callback; }
