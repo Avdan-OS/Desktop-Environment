@@ -14,7 +14,7 @@
 .lock .date-time {
     display: flex;
     flex-direction: column;
-    text-shadow: 0 0 32px hsla(0, 0%, 0%, 0.4);
+    text-shadow: 0 0 24px hsla(0, 0%, 0%, 0.5);
 }
 .lock .date-time #time {
     font-size: 8rem;
