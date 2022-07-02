@@ -86,14 +86,16 @@
     right: 0;
     top: 50%;
 
+    display: flex;
+
     padding: 8px;
     margin: 0 4px;
 
     cursor: pointer;
 
-    transform: translateY(-50%);
+    filter: drop-shadow(0 0 2px black);
 
-    display: flex;
+    transform: translateY(-50%);
 }
 .login .content .dialog .user .user-input.warper .toggle-button * {
     width: 24px;

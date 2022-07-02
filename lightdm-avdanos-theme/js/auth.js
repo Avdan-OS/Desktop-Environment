@@ -8,54 +8,58 @@ var loginButton = document.getElementById("user-input-submit");
 const LoginFailedIssue = {
   "SERVER": 0,
   "API": 1,
-  "AUTH": 2
+  "AUTH": 2,
+  "INTERNAL_AUTH": 3,
+  "UNKNOWN": 10
+}
+
+function wait(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 class Auth {
   constructor () {
-    if (typeof lightdm.autologin_timer_expired == 'object') {
-      lightdm.autologin_timer_expired.connect(this.startAuth);
-    } else {
-      lightdm.autologin_timer_expired = this.startAuth;
-    }
-
     if (typeof lightdm.authentication_complete == 'object') {
-      lightdm.authentication_complete.connect(() => {
-        if (lightdm.is_authenticated) {
-          this.success();
-        } else {
-          this.failed(LoginFailedIssue.AUTH);
-        }
-      });
+      lightdm.authentication_complete.connect(this._onAuthComplete.bind(this));
     } else {
-      lightdm.authentication_complete = () => {
-        if (lightdm.is_authenticated) {
-          this.success();
-        } else {
-          this.failed(LoginFailedIssue.AUTH);
-        }
-      };
-    }
-
-    if (!lightdm) {
-      lightdm.onload = this.startAuth;
-    } else {
-      this.startAuth();
+      lightdm.authentication_complete = this._onAuthComplete.bind(this);
     }
   }
 
-  startAuth() {
+  _onAuthComplete() {
+    if (lightdm.is_authenticated) {
+      this.setMessage(`Authenticated as ${emailInput.value}`);
+      this.success();
+    } else {
+      this.failed(LoginFailedIssue.INTERNAL_AUTH);
+    }
+  }
+
+  async startAuth() {
     console.log("Start authentication");
     lightdm.authenticate(String(lightdm.users[0].username));
+    await wait(100);
+    lightdm.respond(
+      (localStorage.getItem('user-password') != null) ?
+        localStorage.getItem('user-password') : "avdan"
+    );
+
+    // Call authentication_complete manually to login to session properly
+    if (typeof lightdm.authentication_complete != 'object') {
+      await wait(100);
+      lightdm.authentication_complete();
+    }
   }
 
-  failed(failedIssue) {
+  failed(failedIssue, message = "") {
     passwordInput.value = '';
 
     // Error messages/UI
     switch (failedIssue) {
       case LoginFailedIssue.SERVER:
         this.setMessage("An error occurred when reaching the authentication server. Please update your OS or contact your IT manager.");
+        this.animateShake(emailInput);
+        this.animateShake(passwordInput);
         this.animateShake(apiInput);
         break;
 
@@ -65,16 +69,26 @@ class Auth {
         break;
 
       case LoginFailedIssue.AUTH:
-        this.setMessage("Incorrect Password.");
+        this.setMessage("Incorrect email or password.");
+        this.animateShake(emailInput);
         this.animateShake(passwordInput);
         break;
 
-      default:
-        this.setMessage("An error occurred.");
+      case LoginFailedIssue.INTERNAL_AUTH:
+        this.setMessage("Incorrect or unset internal password.");
+        this.animateShake(emailInput);
+        this.animateShake(passwordInput);
+        this.animateShake(apiInput);
+        break;
+
+      case LoginFailedIssue.UNKNOWN:
+        this.setMessage(`An error occurred:\n${message}`);
         this.animateShake(emailInput);
         this.animateShake(passwordInput);
         this.animateShake(apiInput);
     }
+
+    lightdm.cancel_authentication();
 
     emailInput.disabled = false;
     passwordInput.disabled = false;
@@ -168,8 +182,7 @@ class Auth {
 
     try {
       if (email.length > 0 && pass.length > 0 && key.length > 0) {
-        console.log("Sending request");
-        console.log(`Email=${userData.email}&Password=${userData.password}&apikey=${userData.apiKey}`);
+        this.setMessage("Sending request to the server...");
         const request = await fetch('https://enigmapr0ject.tech/api/avdan/login.php/', {
           method: 'POST',
           body: `Email=${userData.email}&Password=${userData.password}&apikey=${userData.apiKey}`
@@ -188,10 +201,7 @@ class Auth {
             this.failed(LoginFailedIssue.AUTH);
             break;
           case '200':
-            lightdm.respond("0812");
-            if (typeof lightdm.authentication_complete != 'object') {
-              lightdm.authentication_complete();
-            }
+            this.startAuth();
             break;
           default:
             this.failed(LoginFailedIssue.SERVER);
@@ -200,7 +210,7 @@ class Auth {
       }
     } catch (e) {
       console.log(e);
-      this.failed();
+      this.failed(LoginFailedIssue.UNKNOWN, e);
     }
   }
 }
