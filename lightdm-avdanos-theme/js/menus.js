@@ -89,14 +89,7 @@ const Menus = {
     this._loadBackgrounds();
 
     this._loadSessions();
-    this._setSession(
-      Utils.checkDefaultSessionAvailability(lightdm.default_session) ?
-        lightdm.sessions.find((session) => {
-          return session.key == lightdm.default_session;
-        })
-      : lightdm.sessions[0],
-      false
-    );
+    this._setSession(Utils.getLastUsedSession(), false);
   },
   closeAllMenus() {
     powerMenu.classList.remove("show");
@@ -192,7 +185,7 @@ const Menus = {
     sessionIcon.src = `img/sessions/${session.key}.png`;
 
     if (update) {
-      lightdm.default_session = session.key;
+      localStorage.setItem('last-used-session', session.key);
     }
   },
 };

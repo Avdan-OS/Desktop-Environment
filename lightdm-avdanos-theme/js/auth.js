@@ -151,9 +151,9 @@ class Auth {
     // Add a delay before unlocking
     setTimeout(() => {
       if (lightdm.start_session) {
-        lightdm.start_session(Utils.getAvailableSession());
+        lightdm.start_session(Utils.getLastUsedSession().key);
       } else {
-        lightdm.start_session_sync(Utils.getAvailableSession());
+        lightdm.start_session_sync(Utils.getLastUsedSession().key);
       }
     }, 1000);
   }

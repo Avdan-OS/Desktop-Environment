@@ -1,15 +1,9 @@
 var Utils = {
-  getAvailableSession() {
-    if (lightdm) {
-      if (this.checkDefaultSessionAvailability(lightdm.default_session)) {
-        return lightdm.default_session
-      } else {
-        return lightdm.sessions[0].key
-      }
-    }
-  },
-  checkDefaultSessionAvailability(session) {
-    return (session && session != 'default');
+  getLastUsedSession() {
+    let lastUsedSession = localStorage.getItem('last-used-session');
+    return (lastUsedSession != null) ?
+      lightdm.sessions.filter((session) => { return session.key == lastUsedSession })[0]
+    : lightdm.sessions[0];
   },
 
   isPromise(value) {
