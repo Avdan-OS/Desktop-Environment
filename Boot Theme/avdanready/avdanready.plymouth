@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=avdanready
+Description=AvdanOS Ready Boot Animation
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/avdanready
+ScriptFile=/usr/share/plymouth/themes/avdanready/avdanready.script

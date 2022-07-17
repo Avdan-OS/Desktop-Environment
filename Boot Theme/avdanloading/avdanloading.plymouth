@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=avdanloading
+Description=AvdanOS Loading Boot Animation
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/avdanloading
+ScriptFile=/usr/share/plymouth/themes/avdanloading/avdanloading.script
