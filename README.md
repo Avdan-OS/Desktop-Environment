@@ -9,6 +9,6 @@ AvdanOS desktop environment
 
 ![Banner](https://raw.githubusercontent.com/Avdan-OS/.github/main/banner/Desktop-Environment.png)
 
-A fluent and consistent, new desktop environment, written in QML(QT 5)
+A fluent and consistent, new desktop environment, written in QML(QT 5) and Rust
 
 </div>
