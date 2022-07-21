@@ -1,3 +1,3 @@
 fn main() {
-    println!("Hello, world!");
+    println!("Wayland Compositor \n It's Still in WIP");
 }
