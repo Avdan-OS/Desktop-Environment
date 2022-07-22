@@ -80,7 +80,7 @@ class Authenticate {
 			console.log("data :",data);
 
 			switch (data) {
-				case '405':
+				case '401':
 					this._authenticationFailed(false, true);
 					break;
 				case '403':
