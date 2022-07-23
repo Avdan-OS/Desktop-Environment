@@ -1,0 +1,108 @@
+.screen.popup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    backdrop-filter: blur(var(--blur-strength));
+
+    background: hsla(0, 0%, 0%, .4);
+
+    transition: all var(--easeOutCubic) calc(var(--animation-speed) / 2);
+}
+.screen.popup.hide {
+    backdrop-filter: blur(0);
+    background: transparent;
+
+    opacity: 1;
+
+    visibility: hidden;
+}
+
+.screen.popup .dialog {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+
+    position: absolute;
+
+    max-width: 480px;
+
+    padding: 16px;
+
+    background: hsla(0, 0%, 0%, .5);
+    border-radius: 16px;
+
+    text-align: center;
+
+    transform: scale(1);
+    opacity: 0;
+    visibility: hidden;
+
+    transition: all var(--easeOutCubic) calc(var(--animation-speed) / 2);
+}
+.screen.popup .dialog.show {
+    opacity: 1;
+    visibility: visible;
+}
+.screen.popup.hide .dialog {
+    transform: scale(.9);
+    opacity: 0;
+}
+.screen.popup .dialog .title {
+    font-size: 2rem;
+    font-weight: bold;
+
+    margin-top: 16px;
+
+    line-height: 1.5;
+}
+.screen.popup .dialog .message {
+    font-size: 1.1rem;
+    line-height: 1.5;
+
+    margin-block: 0;
+    margin-inline: 32px;
+}
+.screen.popup .dialog .bottom {
+    margin-block: 0;
+    margin-bottom: 24px;
+}
+.screen.popup .dialog .popup-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+
+    border-radius: 99px;
+
+    cursor: pointer;
+
+    padding: 12px;
+
+    transition: all var(--easeOutCubic) calc(var(--animation-speed) / 2);
+}
+.screen.popup .dialog .popup-close:hover {
+    background: hsla(0, 0%, 100%, .1);
+}
+.screen.popup .dialog .actions {
+    display: flex;
+    gap: 8px;
+
+    margin-top: 16px;
+
+    width: 100%;
+}
+.screen.popup .dialog .actions .action {
+    flex: 1;
+    padding: 12px 16px;
+
+    cursor: pointer;
+
+    border-radius: 4px;
+}
+.screen.popup .dialog .actions .action:hover {
+    background: hsla(0, 0%, 100%, .1);
+}
+.screen.popup .dialog .actions .action:active {
+    background: hsla(0, 0%, 0%, .1);
+}
