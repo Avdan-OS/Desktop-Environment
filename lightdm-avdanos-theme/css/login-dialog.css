@@ -20,17 +20,49 @@
     opacity: 0;
 }
 
+.login .content .dialog .slider {
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+
+    position: absolute;
+    left: 50%;
+    margin-inline: calc(360px / 2 * -1);
+
+    transition: all var(--easeOutCubic) var(--animation-speed);
+}
+
 .login .content .dialog .user {
+    width: 360px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 24px;
+
+    transition: opacity var(--easeOutCubic) var(--animation-speed);
+}
+.login .content .dialog .user .user-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+.login .content .dialog .user .user-details .user-name {
+    font-size: 1.75em;
+    font-weight: 500;
+}
+.login .content .dialog .user .user-details .user-state {
+    font-size: 1.05em;
 }
 .login .content .dialog .user .inputs {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 8px;
+
+    transition: all calc(var(--animation-speed) / 2);
 }
 .login .content .dialog .user .inputs .login-controls {
     width: 100%;
@@ -52,8 +84,10 @@
     color: var(--foreground-color);
     background: hsla(0, 0%, 0%, 0.2);
     border: none;
-
-    outline: none;
+/*
+    outline: none; */
+    outline: 0px transparent solid;
+    outline-offset: 4px;
 
     transition: all calc(var(--animation-speed) / 2);
 }
@@ -107,7 +141,7 @@
 .login .content .dialog .user .user-input.warper .toggle-button.active .onShow {
     display: none;
 }
-.login .content .dialog .user #user-message {
+.login .content .dialog .user .user-message {
     line-height: 0;
     text-align: center;
 
@@ -118,7 +152,7 @@
 
     transition: all calc(var(--animation-speed) / 2);
 }
-.login .content .dialog .user #user-message.reveal {
+.login .content .dialog .user .user-message.reveal {
     opacity: 1;
 
     line-height: 2;
@@ -144,6 +178,9 @@
 }
 .login .content .dialog .user .user-input:not(.warper):focus {
     background: hsla(0, 0%, 0%, 0.3);
+    outline-width: 2px;
+    outline-color: hsla(0, 0%, 100%, 0.5);
+    outline-offset: 0px;
 }
 .login .content .dialog .user .user-input:not(.warper).fail {
     box-shadow: inset 0 0 0 999px hsla(0, 100%, 50%, 0.1);
@@ -153,10 +190,14 @@
 }
 .login .content .dialog .user.inactive {
     opacity: 0.5;
+    cursor: pointer;
 }
-.login .content .dialog .user.inactive .user-input {
+.login .content .dialog .user.inactive .inputs {
     visibility: hidden;
     opacity: 0;
+}
+.login .content .dialog .user.inactive:hover {
+    opacity: 0.8;
 }
 .login .content .dialog .user .recovery-link {
     color: var(--foreground-color);

@@ -13,34 +13,7 @@
     <div id="login-content" class="content hide">
       <!-- Login Dialog -->
       <div class="dialog">
-        <div class="user">
-          <img id="user-picture" class="user-picture" src="./user-picture.png">
-          <div class="inputs">
-            <input type='email' class="user-input" id='user-input-email' autocomplete='off' placeholder='Email'/>
-            <div class="user-input warper">
-              <input type='password' class="user-input" id='user-input-password' autocomplete='off' placeholder='Password'/>
-              <span class="toggle-button" onclick="">
-                <img src="./img/show.png" class="onShow">
-                <img src="./img/hide.png" class="onHide">
-              </span>
-            </div>
-            <div class="user-input warper">
-              <input type='password' class="user-input" id='user-input-api' autocomplete='off' placeholder='API Key'/>
-              <span class="toggle-button" onclick="">
-                <img src="./img/show.png" class="onShow">
-                <img src="./img/hide.png" class="onHide">
-              </span>
-            </div>
-            <span id="user-message"></span>
-            <div class="login-controls">
-              <div id="back-button" class="button"><img src="img/back.png"></div>
-              <input type='button' class="user-input" id='user-input-submit' value='Log In'/>
-            </div>
-          </div>
-          <a
-            class="recovery-link" href="javascript:PopupDialog.switchDialog('forgot-password');PopupDialog.show();">
-            Forgot Password?
-          </a>
+        <div id="users" class="slider">
         </div>
       </div>
 
@@ -146,12 +119,6 @@
   </div>
   <!-- Popup Screen -->
   <div id="popup-screen" class="screen popup hide">
-    <div id="forgot-password-dialog" class="dialog">
-      <img src="./img/close.png" class="popup-close">
-      <span class="title">Forgot Password?</span>
-      <p class="message">If you forgot your password, you need to reset your password to the new one at:</p>
-      <a class="bottom">https://enigmapr0ject.tech/api/avdan/forgotPassword.php</a>
-    </div>
     <div id="leave-greeter-dialog" class="dialog">
       <img src="./img/close.png" class="popup-close">
       <span id="leave-greeter-dialog-title" class="title">Shutdown</span>

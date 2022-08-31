@@ -104,6 +104,11 @@ var Debug = {
 						display_name: 'Jeffery Holley',
 						username: 'jeffrey12',
 						image: 'user-picture.png'
+					},
+					{
+						display_name: 'Chris Glasser',
+						username: 'chris11',
+						image: 'user-picture.png'
 					}
 				],
 				languages: [

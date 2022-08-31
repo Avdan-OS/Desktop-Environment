@@ -1,24 +1,10 @@
-var emailInput = document.getElementById('user-input-email');
-var passwordInput = document.getElementById('user-input-password');
-var apiInput = document.getElementById('user-input-api');
-var userMessage = document.getElementById('user-message');
-
-var loginButton = document.getElementById("user-input-submit");
-
-const LoginFailedIssue = {
-  "SERVER": 0,
-  "API": 1,
-  "AUTH": 2,
-  "INTERNAL_AUTH": 3,
-  "UNKNOWN": 10
-}
-
 function wait(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 class Auth {
   constructor () {
+    this.currentAuthenticating = "unknown";
     if (typeof lightdm.authentication_complete == 'object') {
       lightdm.authentication_complete.connect(this._onAuthComplete.bind(this));
     } else {
@@ -28,21 +14,18 @@ class Auth {
 
   _onAuthComplete() {
     if (lightdm.is_authenticated) {
-      this.setMessage(`Authenticated as ${emailInput.value}`);
+      this.setMessage(`Loading session...`, document.getElementById(`user-message_${this.currentAuthenticating}`));
       this.success();
     } else {
-      this.failed(LoginFailedIssue.INTERNAL_AUTH);
+      this.failed();
     }
   }
 
-  async startAuth() {
+  async startAuth(username, password) {
     console.log("Start authentication");
-    lightdm.authenticate(String(lightdm.users[0].username));
+    lightdm.authenticate(username);
     await wait(100);
-    lightdm.respond(
-      (localStorage.getItem('user-password') != null) ?
-        localStorage.getItem('user-password') : "avdan"
-    );
+    lightdm.respond(password);
 
     // Call authentication_complete manually to login to session properly
     if (typeof lightdm.authentication_complete != 'object') {
@@ -51,57 +34,28 @@ class Auth {
     }
   }
 
-  failed(failedIssue, message = "") {
+  failed() {
+    let passwordInput = document.getElementById(`user-password-field_${this.currentAuthenticating}`);
+    let loginButton = document.getElementById(`user-login-button_${this.currentAuthenticating}`);
+
     passwordInput.value = '';
 
     // Error messages/UI
-    switch (failedIssue) {
-      case LoginFailedIssue.SERVER:
-        this.setMessage("An error occurred when reaching the authentication server. Please update your OS or contact your IT manager.");
-        this.animateShake(emailInput);
-        this.animateShake(passwordInput);
-        this.animateShake(apiInput);
-        break;
-
-      case LoginFailedIssue.API:
-        this.setMessage("Incorrect API key.");
-        this.animateShake(apiInput);
-        break;
-
-      case LoginFailedIssue.AUTH:
-        this.setMessage("Incorrect email or password.");
-        this.animateShake(emailInput);
-        this.animateShake(passwordInput);
-        break;
-
-      case LoginFailedIssue.INTERNAL_AUTH:
-        this.setMessage("Incorrect or unset internal password.");
-        this.animateShake(emailInput);
-        this.animateShake(passwordInput);
-        this.animateShake(apiInput);
-        break;
-
-      case LoginFailedIssue.UNKNOWN:
-        this.setMessage(`An error occurred:\n${message}`);
-        this.animateShake(emailInput);
-        this.animateShake(passwordInput);
-        this.animateShake(apiInput);
-    }
+    this.setMessage("Incorrect password.", document.getElementById(`user-message_${this.currentAuthenticating}`));
+    this.animateShake(passwordInput);
 
     lightdm.cancel_authentication();
 
-    emailInput.disabled = false;
     passwordInput.disabled = false;
-    apiInput.disabled = false;
     loginButton.disabled = false;
   }
 
-  setMessage(message = "") {
+  setMessage(message = "", userMessageElement) {
     if (message) {
-      userMessage.classList.add('reveal');
-      userMessage.innerText = message;
+      userMessageElement.classList.add('reveal');
+      userMessageElement.innerText = message;
     } else {
-      userMessage.classList.remove('reveal');
+      userMessageElement.classList.remove('reveal');
     }
 
   }
@@ -120,19 +74,9 @@ class Auth {
   }
 
   checkInputAvailability(userData) {
-    if (userData.email.length == 0) {
-      this.animateShake(emailInput);
-      this.setMessage('Email must be filled.');
-      return false;
-    }
     if (userData.password.length == 0) {
-      this.animateShake(passwordInput);
-      this.setMessage('Password must be filled.');
-      return false;
-    }
-    if (userData.apiKey.length == 0) {
-      this.animateShake(apiInput);
-      this.setMessage('API key must be filled.');
+      this.animateShake(document.getElementById(`user-password-field_${userData.username}`));
+      this.setMessage('Password must be filled.', document.getElementById(`user-message_${userData.username}`));
       return false;
     }
 
@@ -140,6 +84,8 @@ class Auth {
   }
 
   success() {
+    let passwordInput = document.getElementById(`user-password-field_${this.currentAuthenticating}`);
+
     // Make password input read-only
     passwordInput.readOnly = true;
     passwordInput.blur();
@@ -158,59 +104,26 @@ class Auth {
     }, 1000);
   }
 
-  async startAuthentication() {
+  async startAuthentication(username) {
     const userData = {
-      email: emailInput.value,
-      password: passwordInput.value,
-      apiKey: apiInput.value
+      username: username,
+      password: document.getElementById(`user-password-field_${username}`).value
     }
 
     let availability = this.checkInputAvailability(userData);
 
     if (!availability) { return; }
 
-    emailInput.disabled = true;
-    passwordInput.disabled = true;
-    apiInput.disabled = true;
-    loginButton.disabled = true;
+    document.getElementById(`user-password-field_${userData.username}`).disabled = true;
+    document.getElementById(`user-login-button_${userData.username}`).disabled = true;
 
-    const email = userData.email;
-    const pass = userData.password;
-    const key = userData.apiKey;
+    this.setMessage("", document.getElementById(`user-message_${userData.username}`));
 
-    this.setMessage();
-
-    try {
-      if (email.length > 0 && pass.length > 0 && key.length > 0) {
-        this.setMessage("Sending request to the server...");
-        const request = await fetch('https://enigmapr0ject.tech/api/avdan/login.php/', {
-          method: 'POST',
-          body: `Email=${userData.email}&Password=${userData.password}&apikey=${userData.apiKey}`
-        })
-
-        console.log(request);
-
-        const data = await request.text();
-        console.log("data :",data);
-
-        switch (data) {
-          case '401':
-            this.failed(LoginFailedIssue.API);
-            break;
-          case '403':
-            this.failed(LoginFailedIssue.AUTH);
-            break;
-          case '200':
-            this.startAuth();
-            break;
-          default:
-            this.failed(LoginFailedIssue.SERVER);
-            break;
-        }
-      }
-    } catch (e) {
-      console.log(e);
-      this.failed(LoginFailedIssue.UNKNOWN, e);
+    if (userData.password.length > 0) {
+      this.currentAuthenticating = username;
+      this.startAuth(userData.username, userData.password);
+    } else {
+      this.failed();
     }
   }
 }
