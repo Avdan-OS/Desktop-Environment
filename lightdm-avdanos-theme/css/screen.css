@@ -1,0 +1,54 @@
+.screen {
+	width: 100%;
+	height: 100%;
+
+    box-sizing: border-box;
+
+	position: fixed;
+	top: 0;
+	left: 0;
+
+	margin: 0;
+	padding: 100px;
+
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	user-select: none;
+
+    opacity: 1;
+    transition: all var(--easeOutCubic) var(--animation-speed);
+}
+.screen.hide {
+    opacity: 0;
+}
+.screen .content {
+    display: flex;
+
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.screen.blank {
+    background: var(--background-color);
+}
+.screen.blank.hide {
+    pointer-events: none;
+}
+
+.screen.menus {
+    z-index: 10;
+}
+
+.screen.background {
+    background: url('../background.png');
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+
+    transition-duration: var(--animation-speed);
+}
+.screen.background.blur {
+    filter: blur(var(--blur-strength)) brightness(50%);
+    transform: scale(1.1);
+}

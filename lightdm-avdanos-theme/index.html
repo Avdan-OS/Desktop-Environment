@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, viewport-fit=cover, minimum-scale=1.0, maximum-scale=1.0">
+  <link rel="stylesheet" href="css/main.css" class="style">
+</head>
+<body>
+  <!-- Background Screen -->
+  <div id="background-screen" class="screen background blur"></div>
+  <!-- Login Screen -->
+  <div id="login-screen" class="screen login">
+    <div id="login-content" class="content hide">
+      <!-- Login Dialog -->
+      <div class="dialog">
+        <div id="users" class="slider">
+        </div>
+      </div>
+
+      <!-- System Status -->
+      <div class="system-status">
+        <div id="power-button" class="system-item power">
+          <img src="img/power.png">
+        </div>
+        <div id="battery-button" class="system-item revealable battery">
+          <div class="battery-indicator">
+            <img src="img/battery.svg">
+            <span id="battery-bar" class="bar"></span>
+          </div>
+          <span class="battery-data reveal-child">50%</span>
+        </div>
+        <div id="brightness-button" class="system-item revealable brightness">
+          <img src="img/brightness.png">
+          <span class="brightness-data reveal-child">50%</span>
+        </div>
+        <div id="layout-button" class="system-item layout fadable">
+          <span id="layout-name">EN</span>
+        </div>
+      </div>
+
+      <!-- System Info -->
+      <div class="system-info fadable">
+        <div id="background-button" class="system-item circular">
+          <img src="img/background.png">
+        </div>
+        <div id="session-button" class="system-item session">
+          <img id="session-icon" class="icon">
+          <span id="session-name" class="name">Plasma</span>
+        </div>
+        <span id="clock-button" class="system-item clock">12:34 PM</span>
+      </div>
+
+      <!-- Menus -->
+      <div id="power-menu" class="menus">
+        <div id="sleep-menu-item" class="item disabled">
+          <img class="user-picture" src="./img/sleep.png">
+          <span>Sleep</span>
+        </div>
+        <div id="hibernate-menu-item" class="item disabled">
+          <img class="user-picture" src="./img/hibernate.png">
+          <span>Hibernate</span>
+        </div>
+        <div id="restart-menu-item" class="item disabled">
+          <img class="user-picture" src="./img/restart.png">
+          <span>Restart</span>
+        </div>
+        <div id="shutdown-menu-item" class="item disabled">
+          <img class="user-picture" src="./img/shutdown.png">
+          <span>Shut Down</span>
+        </div>
+      </div>
+      <div id="battery-menu" class="menus">
+        <div class="list">
+          <div class="battery-indicator">
+            <img src="img/battery.svg" width="64" height="64">
+            <span id="battery-bar-large" class="bar"></span>
+          </div>
+          <div class="details">
+            <span class="battery-data level">50%</span>
+            <span id="battery-state">Disconnected</span>
+          </div>
+        </div>
+      </div>
+      <div id="brightness-menu" class="menus">
+        <div class="list">
+          <input id="brightness-slider" type="range" name="brightness">
+          <span class="brightness-data">50%</span>
+        </div>
+      </div>
+      <div id="layout-menu" class="menus"></div>
+
+      <div id="background-menu" class="menus">
+        <span>Backgrounds:</span>
+        <div id="background-list" class="list"></div>
+      </div>
+      <div id="session-menu" class="menus"></div>
+      <div id="clock-menu" class="menus">
+        <span class="clock">12:34</span>
+        <span class="date"></span>
+        <div id="format">
+          <span>Time Format:</span>
+          <div class="switcher">
+            <span id="time-12h-format-button" class="item">12h</span>
+            <span id="time-24h-format-button" class="item">24h</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Lock Screen -->
+  <div id="lock-screen" class="screen lock">
+      <div class="date-time">
+        <span>
+          <span id="time">12:34</span>
+          <span id="time-midday">PM</span>
+        </span>
+        <span class="date">Tuesday, June 21</span>
+      </div>
+  </div>
+  <!-- Popup Screen -->
+  <div id="popup-screen" class="screen popup hide">
+    <div id="leave-greeter-dialog" class="dialog">
+      <img src="./img/close.png" class="popup-close">
+      <span id="leave-greeter-dialog-title" class="title">Shutdown</span>
+      <p id="leave-greeter-dialog-message" class="message">Do you really want to shutdown your computer?</p>
+      <div class="actions">
+        <span class="action" onclick="PopupDialog.hide();">Cancel</span>
+        <span id="leave-greeter-dialog-confirm-button" class="action">Shutdown</span>
+      </div>
+    </div>
+  </div>
+  <!-- Blank/Black Screen -->
+  <div id="blank-screen" class="screen blank"></div>
+</body>
+<!-- Some scripts -->
+<script src="./js/debug.js"></script>
+<script src="./js/utils.js"></script>
+<script src="./js/auth.js"></script>
+<script src="./js/backgrounds.js"></script>
+<script src="./js/transition.js"></script>
+<script src="./js/menus.js"></script>
+<script src="./js/power.js"></script>
+<script src="./js/clock.js"></script>
+<script src="./js/popup-dialog.js"></script>
+<script src="./js/lock-dialog.js"></script>
+<script src="./js/login-dialog.js"></script>
+<script src="./js/key-event.js"></script>
+</html>
