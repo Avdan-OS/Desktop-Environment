@@ -1,7 +1,5 @@
 <div align="center">
   
-# Important: we are migrating to a new Discord server [.gg/avdanos](https://discord.gg/avdanos)
-  
 # Nadva Desktop Enviroment
 AvdanOS desktop environment
 
