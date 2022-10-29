@@ -1,0 +1,4 @@
+[submodule "Compositor"]
+	path = Compositor
+	url = https://github.com/Avdan-OS/Compositor.git
+	branch = dev
